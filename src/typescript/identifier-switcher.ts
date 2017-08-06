@@ -1,15 +1,13 @@
 import * as ts from 'typescript';
 import {Replacement} from './replacements';
-import {getSymbolOfIdentifier} from './identifier';
-import {includesAngularMaterialPrefix, isAngularMaterialImportSpecifier} from './material-module';
+import {getOriginalSymbolFromIdentifier} from './identifier';
+import {includesAngularMaterialPrefix} from './material-module';
 
 export class IdentifierSwitcher {
 
   /** Replacements that can be applied to switch all Material identifiers to the new prefix. */
   private replacements: Replacement[] = [];
 
-  /** List of declarations that are belonging to the Angular Material module. */
-  private declarations: ts.Declaration[] = [];
 
   constructor(private sourceFile: ts.SourceFile,
               private checker: ts.TypeChecker) {}
@@ -31,23 +29,21 @@ export class IdentifierSwitcher {
 
   /** Method that is called whenever an identifier has been found. */
   private visitIdentifier(node: ts.Identifier) {
-    const symbol = getSymbolOfIdentifier(node, this.checker);
-
-    if (!includesAngularMaterialPrefix(symbol)) {
+    if (!includesAngularMaterialPrefix(node.text)) {
       return;
     }
 
-    if (isAngularMaterialImportSpecifier(node)) {
-      this.declarations.push(symbol.valueDeclaration);
-      this.createReplacement(node, symbol.name.replace(/^Md/, 'Mat'));
-    } else if (this.isAngularMaterialSymbol(symbol)) {
-      this.createReplacement(node, symbol.name.replace(/^Md/, 'Mat'));
-    }
-  }
+    const originalSymbol = getOriginalSymbolFromIdentifier(node, this.checker);
+    const valueDeclaration = originalSymbol.valueDeclaration;
+    const valueSourceFile = valueDeclaration.getSourceFile();
 
-  /** Method that checks whether the given symbol is a declaration of Angular Material. */
-  private isAngularMaterialSymbol(symbol: ts.Symbol) {
-    return this.declarations.indexOf(symbol.valueDeclaration) !== -1;
+
+    if (valueSourceFile.isDeclarationFile &&
+        valueSourceFile.fileName.indexOf('node_modules/@angular/material') !== -1) {
+
+
+     this.createReplacement(node, originalSymbol.name.replace(/^Md/, 'Mat'));
+    }
   }
 
   /** Method that creates a new replacement at the given node. */

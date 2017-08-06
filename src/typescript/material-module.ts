@@ -11,6 +11,6 @@ export function isAngularMaterialImportSpecifier(node: ts.Node) {
 }
 
 /** Whether the given TypeScript symbol includes the Material prefix. */
-export function includesAngularMaterialPrefix(node: ts.Symbol) {
-  return node.name.match(/^Md/);
+export function includesAngularMaterialPrefix(node: string) {
+  return node.match(/^Md/);
 }
