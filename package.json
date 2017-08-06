@@ -4,7 +4,8 @@
   "description": "Switches the outdated `Md` prefix to `Mat` in Angular Material applications",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "ts-node --project src/ src/cli.ts -p test/fixtures/sample-project"
   },
   "author": "",
   "license": "MIT",

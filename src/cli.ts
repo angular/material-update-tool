@@ -32,7 +32,7 @@ if (projectPath) {
   const switcher = new MatSwitcher(projectPath);
 
   // Update all source files in the project by replacing the Mat prefix.
-  switcher.updateSourceFiles();
+  switcher.updateProject();
 
   console.log(green('Successfully updated the project source files.'))
 }

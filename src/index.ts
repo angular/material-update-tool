@@ -1,37 +1,26 @@
 import * as ts from 'typescript';
-import {writeFileSync} from 'fs';
-import {createProgramFromConfig} from './typescript/load-project';
-import {IdentifierSwitcher} from './typescript/identifier-switcher';
-import {updateSourceFileText} from './typescript/replacements';
+import {createProgramFromConfig} from './typescript/create-program';
+import {TransformerPipeline} from './common/transformer-pipeline';
+import {replaceTypeScriptIdentifiers} from './transformers/replace-typescript-identifiers';
 
 export class MatSwitcher {
 
+  /** TypeScript program that will be transformed. */
   readonly program: ts.Program;
+
+  /** Pipeline of TypeScript source file transformers */
+  readonly pipeline: TransformerPipeline;
 
   constructor(project: string) {
     this.program = createProgramFromConfig(project);
+
+    this.pipeline = new TransformerPipeline([
+      replaceTypeScriptIdentifiers
+    ]);
   }
 
   /** Walks through every source file and updates the outdated prefixes inside. */
-  updateSourceFiles() {
-    for (let sourceFile of this.getSourceFiles()) {
-      this.updateSourceFile(sourceFile);
-    }
+  updateProject() {
+    this.pipeline.execute(this.program);
   }
-
-  /** Updates the outdated Material prefix in the source file updates it. */
-  updateSourceFile(sourceFile: ts.SourceFile) {
-    const replacements = new IdentifierSwitcher(sourceFile, this.program.getTypeChecker())
-      .createReplacements();
-
-    const newSourceContent = updateSourceFileText(sourceFile.getFullText(), replacements);
-
-    writeFileSync(sourceFile.fileName, newSourceContent);
-  }
-
-  /** Returns all source files of the current project. */
-  getSourceFiles() {
-    return this.program.getSourceFiles().filter(sourceFile => !sourceFile.isDeclarationFile);
-  }
-
 }
