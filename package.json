@@ -14,9 +14,15 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
+    "@angular/cdk": "github:angular/cdk-builds",
+    "@angular/common": "^4.3.3",
+    "@angular/core": "^4.3.3",
+    "@angular/material": "github:angular/material2-builds",
     "@types/chalk": "^0.4.31",
     "@types/node": "^8.0.17",
     "@types/yargs": "^8.0.1",
-    "ts-node": "^3.3.0"
+    "rxjs": "^5.4.2",
+    "ts-node": "^3.3.0",
+    "zone.js": "^0.8.16"
   }
 }
