@@ -2,6 +2,7 @@ import * as ts from 'typescript';
 import {createProgramFromConfig} from './typescript/create-program';
 import {TransformerPipeline} from './common/transformer-pipeline';
 import {replaceTypeScriptIdentifiers} from './transformers/replace-typescript-identifiers';
+import {replaceStringLiterals} from './transformers/replace-string-literals';
 
 export class MatSwitcher {
 
@@ -15,7 +16,8 @@ export class MatSwitcher {
     this.program = createProgramFromConfig(project);
 
     this.pipeline = new TransformerPipeline([
-      replaceTypeScriptIdentifiers
+      replaceTypeScriptIdentifiers,
+      replaceStringLiterals
     ]);
   }
 

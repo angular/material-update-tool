@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {AppComponent} from './app-component';
+import {AppComponent} from './app/app-component';
 import {MdCheckboxModule} from '@angular/material'
 import {Lol} from './re-export';
 

@@ -4,5 +4,6 @@ export const materialModulePathSegment = 'node_modules/@angular/material';
 
 /** Whether the given TypeScript symbol includes the Material prefix. */
 export function includesAngularMaterialPrefix(node: string) {
-  return node.match(/^Md/);
+  // TODO(devversion): case specific changes
+  return node.match(/^Md/i);
 }
