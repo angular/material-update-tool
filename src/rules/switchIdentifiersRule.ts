@@ -28,8 +28,10 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
   /** List of Angular Material declarations inside of the current source file. */
   materialDeclarations: ts.Declaration[] = [];
 
+  /** Method that is called for every identifier inside of the specified project. */
   visitIdentifier(identifier: ts.Identifier) {
-
+    // For identifiers that don't include the outdated Material prefix, the whole check can be
+    // skipped safely.
     if (!includesAngularMaterialPrefix(identifier.text)) {
       return;
     }
