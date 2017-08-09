@@ -2,11 +2,11 @@ import {Rules, RuleFailure, ProgramAwareRuleWalker} from 'tslint';
 import * as ts from 'typescript';
 import {getOriginalSymbolFromIdentifier} from '../typescript/identifiers';
 import {isExportSpecifierNode, isImportSpecifierNode} from '../typescript/imports';
+import {includesAngularMaterialPrefix} from '../material/prefix';
 import {
-  includesAngularMaterialPrefix,
   isMaterialImportDeclaration,
   isMaterialExportDeclaration,
-} from '../common/material-module';
+} from '../material/typescript-specifiers';
 
 /** Message that is being sent to TSLint if an identifier still uses the outdated prefix. */
 const failureMessage = 'Identifier can be switched from "Md" prefix to "Mat".';

@@ -1,0 +1,10 @@
+{
+  "md-button": {
+    "inputs": [
+      "disableRipple"
+    ],
+    "outputs": [
+      "rippleCreated"
+    ]
+  }
+}

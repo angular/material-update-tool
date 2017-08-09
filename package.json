@@ -4,8 +4,8 @@
   "description": "Switches the outdated `Md` prefix to `Mat` in Angular Material applications",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -p src/ && npm run copy-files",
-    "copy-files": "cp src/migration.json ./dist",
+    "build": "tsc -p ./ && npm run copy-files",
+    "copy-files": "cpy \"**/*.json\" ../dist --parents --cwd ./src/",
     "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v"
   },
   "author": "",
@@ -27,6 +27,7 @@
     "@types/jasmine": "^2.5.53",
     "@types/node": "^8.0.17",
     "@types/yargs": "^8.0.1",
+    "cpy-cli": "^1.0.1",
     "rxjs": "^5.4.2",
     "ts-node": "^3.3.0",
     "zone.js": "^0.8.16"

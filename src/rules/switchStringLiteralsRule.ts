@@ -1,6 +1,7 @@
 import {Rules, RuleFailure, RuleWalker} from 'tslint';
 import * as ts from 'typescript';
-import {includesAngularMaterialPrefix} from '../common/material-module';
+import {includesAngularMaterialPrefix} from '../material/prefix';
+import {materialComponentData} from '../material/component-data';
 
 /** Message that is being sent to TSLint if a string literal still uses the outdated prefix. */
 const failureMessage = 'String literal can be switched from "Md" prefix to "Mat".';
@@ -24,8 +25,7 @@ export class SwitchStringLiteralsWalker extends RuleWalker {
       return;
     }
 
-    // TODO: Verify if this is a valid selector by comparing with the list of selectors file (JSON)
-    if (!includesAngularMaterialPrefix(stringLiteral.text)) {
+    if (!materialComponentData[stringLiteral.text]) {
       return;
     }
 

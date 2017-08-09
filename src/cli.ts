@@ -41,7 +41,7 @@ if (statSync(projectPath).isDirectory()) {
 
 if (projectPath) {
   const tslintBin = resolveBin('tslint');
-  const migrationConfig = join(__dirname, 'migration.json');
+  const migrationConfig = join(__dirname, 'rules', 'tslint-migration.json');
 
   // Run the TSLint CLI with the configuration file from the migration tool.
   const output = spawnSync('node', [tslintBin, '-c', migrationConfig, '-p', projectPath, '--fix']);
