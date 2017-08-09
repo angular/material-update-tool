@@ -1,6 +1,5 @@
 import {Rules, RuleFailure, RuleWalker} from 'tslint';
 import * as ts from 'typescript';
-import {includesAngularMaterialPrefix} from '../material/prefix';
 import {materialComponentData} from '../material/component-data';
 
 /** Message that is being sent to TSLint if a string literal still uses the outdated prefix. */
