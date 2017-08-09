@@ -1,6 +1,7 @@
 {
   "rulesDirectory": ["./rules"],
   "rules": {
-    "switch-identifiers": true
+    "switch-identifiers": true,
+    "switch-string-literals": true
   }
 }

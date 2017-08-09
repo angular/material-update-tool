@@ -62,9 +62,9 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
   /** Creates a failure and replacement for the specified identifier. */
   private createIdentifierFailure(identifier: ts.Identifier, symbol: ts.Symbol) {
     const replacement = this.createReplacement(
+      // TODO(devversion): case specific changes
       identifier.getStart(), identifier.getWidth(), symbol.name.replace(/^Md/, 'Mat'));
 
     this.addFailureAtNode(identifier, failureMessage, replacement);
   }
-
 }
