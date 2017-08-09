@@ -1,0 +1,6 @@
+{
+  "rulesDirectory": ["./rules"],
+  "rules": {
+    "switch-identifiers": true
+  }
+}

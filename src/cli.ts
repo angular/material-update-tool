@@ -1,7 +1,11 @@
 import {option, help, argv} from 'yargs';
 import {red, green} from 'chalk';
 import {statSync, existsSync} from 'fs';
-import {MatSwitcher} from './index';
+import {join} from 'path';
+import {spawnSync} from 'child_process';
+
+// This import lacks of type definitions.
+const resolveBin = require('resolve-bin').sync;
 
 // Register a help page in yargs.
 help();
@@ -12,6 +16,13 @@ option('project', {
   describe: 'Path to the tsconfig.json file of the project',
   string: true,
   required: true
+});
+
+option('verbose', {
+  alias: 'v',
+  describe: 'Whether verbose logging should be enabled',
+  boolean: true,
+  required: false
 });
 
 /** Path to the TypeScript project. */
@@ -29,10 +40,21 @@ if (statSync(projectPath).isDirectory()) {
 }
 
 if (projectPath) {
-  const switcher = new MatSwitcher(projectPath);
+  const tslintBin = resolveBin('tslint');
+  const migrationConfig = join(__dirname, 'migration.json');
 
-  // Update all source files in the project by replacing the Mat prefix.
-  switcher.updateProject();
+  // Run the TSLint CLI with the configuration file from the migration tool.
+  const output = spawnSync('node', [tslintBin, '-c', migrationConfig, '-p', projectPath, '--fix']);
 
-  console.log(green('Successfully updated the project source files.'))
+  // If verbose mode is enabled, print the stdout output from the child process.
+  if (argv.verbose) {
+    console.info(`\n${output.stdout.toString()}\n`);
+  }
+
+  if (output.status !== 0) {
+    console.error(`\n${output.stderr.toString()}\n`);
+    console.error(red('Errors occurred while migrating the Angular Material project.'));
+  } else {
+    console.info(green('Successfully updated the project source files.'))
+  }
 }
