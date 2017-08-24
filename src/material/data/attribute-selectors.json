@@ -1,0 +1,304 @@
+[
+  {
+    "md": "[mat-card-md-image]",
+    "mat": "[matCardImageMedium]"
+  },
+  {
+    "md": "[md-autosize]",
+    "mat": "[matTextareaAutosize]",
+    "tagPrefix": "textarea"
+  },
+  {
+    "md": "[md-basic-chip]",
+    "mat": "[mat-basic-chip]"
+  },
+  {
+    "md": "[md-basic-chip]",
+    "mat": "[mat-basic-chip]"
+  },
+  {
+    "md": "[md-button]",
+    "mat": "[mat-button]",
+    "tagPrefix": "a, button"
+  },
+  {
+    "md": "[md-calendar-body]",
+    "mat": "[mat-calendar-body]"
+  },
+  {
+    "md": "[md-card-avatar]",
+    "mat": "[matCardAvatar]"
+  },
+  {
+    "md": "[md-card-image]",
+    "mat": "[matCardImage]"
+  },
+  {
+    "md": "[md-card-lg-image]",
+    "mat": "[matCardImageLarge]"
+  },
+  {
+    "md": "[md-card-md-image]",
+    "mat": "[matCardImageMedium]"
+  },
+  {
+    "md": "[md-card-sm-image]",
+    "mat": "[matCardImageSmall]"
+  },
+  {
+    "md": "[md-card-subtitle]",
+    "mat": "[matCardSubtitle]"
+  },
+  {
+    "md": "[md-card-title]",
+    "mat": "[matCardTitle]"
+  },
+  {
+    "md": "[md-card-xl-image]",
+    "mat": "[matCardImageXLarge]"
+  },
+  {
+    "md": "[md-chip]",
+    "mat": "[mat-chip]"
+  },
+  {
+    "md": "[md-dialog-actions]",
+    "mat": "[matDialogActions]"
+  },
+  {
+    "md": "[md-dialog-close]",
+    "mat": "[matDialogClose]",
+    "tagPrefix": "button"
+  },
+  {
+    "md": "[md-dialog-content]",
+    "mat": "[matDialogContent]"
+  },
+  {
+    "md": "[md-dialog-title]",
+    "mat": "[matDialogTitle]"
+  },
+  {
+    "md": "[md-fab]",
+    "mat": "[mat-fab]",
+    "tagPrefix": "a, button"
+  },
+  {
+    "md": "[md-icon-button]",
+    "mat": "[mat-icon-button]",
+    "tagPrefix": "a, button"
+  },
+  {
+    "md": "[md-line]",
+    "mat": "[matLine]"
+  },
+  {
+    "md": "[md-list-avatar]",
+    "mat": "[matListAvatar]"
+  },
+  {
+    "md": "[md-list-icon]",
+    "mat": "[matListIcon]"
+  },
+  {
+    "md": "[md-list-item]",
+    "mat": "[mat-list-item]",
+    "tagPrefix": "a"
+  },
+  {
+    "md": "[md-menu-item]",
+    "mat": "[mat-menu-item]"
+  },
+  {
+    "md": "[md-menu-trigger-for]",
+    "mat": "[matMenuTriggerFor]"
+  },
+  {
+    "md": "[md-mini-fab]",
+    "mat": "[mat-mini-fab]",
+    "tagPrefix": "a, button"
+  },
+  {
+    "md": "[md-raised-button]",
+    "mat": "[mat-raised-button]",
+    "tagPrefix": "a, button"
+  },
+  {
+    "md": "[md-ripple]",
+    "mat": "[matRipple]"
+  },
+  {
+    "md": "[md-sort-header]",
+    "mat": "[mat-sort-header]"
+  },
+  {
+    "md": "[md-subheader]",
+    "mat": "[matSubheader]"
+  },
+  {
+    "md": "[md-tab-label]",
+    "mat": "[matTabLabel]"
+  },
+  {
+    "md": "[md-tab-link]",
+    "mat": "[matTabLink]"
+  },
+  {
+    "md": "[md-tab-nav-bar]",
+    "mat": "[mat-tab-nav-bar]"
+  },
+  {
+    "md": "[md-tooltip]",
+    "mat": "[matTooltip]"
+  },
+  {
+    "md": "[mdAutocomplete]",
+    "mat": "[matAutocomplete]",
+    "tagPrefix": "input, textarea"
+  },
+  {
+    "md": "[mdCardAvatar]",
+    "mat": "[matCardAvatar]"
+  },
+  {
+    "md": "[mdCardImage]",
+    "mat": "[matCardImage]"
+  },
+  {
+    "md": "[mdCardImageLarge]",
+    "mat": "[matCardImageLarge]"
+  },
+  {
+    "md": "[mdCardImageMedium]",
+    "mat": "[matCardImageMedium]"
+  },
+  {
+    "md": "[mdCardImageSmall]",
+    "mat": "[matCardImageSmall]"
+  },
+  {
+    "md": "[mdCardImageXLarge]",
+    "mat": "[matCardImageXLarge]"
+  },
+  {
+    "md": "[mdCardSubtitle]",
+    "mat": "[matCardSubtitle]"
+  },
+  {
+    "md": "[mdCardTitle]",
+    "mat": "[matCardTitle]"
+  },
+  {
+    "md": "[mdCellDef]",
+    "mat": "[matCellDef]"
+  },
+  {
+    "md": "[mdChipInputFor]",
+    "mat": "[matChipInputFor]",
+    "tagPrefix": "input"
+  },
+  {
+    "md": "[mdChipRemove]",
+    "mat": "[matChipRemove]"
+  },
+  {
+    "md": "[mdColumnDef]",
+    "mat": "[matColumnDef]"
+  },
+  {
+    "md": "[mdDatepicker]",
+    "mat": "[matDatepicker]",
+    "tagPrefix": "input"
+  },
+  {
+    "md": "[mdDialogActions]",
+    "mat": "[matDialogActions]"
+  },
+  {
+    "md": "[mdDialogClose]",
+    "mat": "[matDialogClose]",
+    "tagPrefix": "button"
+  },
+  {
+    "md": "[mdDialogContent]",
+    "mat": "[matDialogContent]"
+  },
+  {
+    "md": "[mdDialogTitle]",
+    "mat": "[matDialogTitle]"
+  },
+  {
+    "md": "[mdHeaderCellDef]",
+    "mat": "[matHeaderCellDef]"
+  },
+  {
+    "md": "[mdHeaderRowDef]",
+    "mat": "[matHeaderRowDef]"
+  },
+  {
+    "md": "[mdInput]",
+    "mat": "[matInput]",
+    "tagPrefix": "input, textarea"
+  },
+  {
+    "md": "[mdLine]",
+    "mat": "[matLine]"
+  },
+  {
+    "md": "[mdListAvatar]",
+    "mat": "[matListAvatar]"
+  },
+  {
+    "md": "[mdListIcon]",
+    "mat": "[matListIcon]"
+  },
+  {
+    "md": "[mdMenuTriggerFor]",
+    "mat": "[matMenuTriggerFor]"
+  },
+  {
+    "md": "[mdPrefix]",
+    "mat": "[matPrefix]"
+  },
+  {
+    "md": "[mdRipple]",
+    "mat": "[matRipple]"
+  },
+  {
+    "md": "[mdRowDef]",
+    "mat": "[matRowDef]"
+  },
+  {
+    "md": "[mdSort]",
+    "mat": "[matSort]"
+  },
+  {
+    "md": "[mdSubheader]",
+    "mat": "[matSubheader]"
+  },
+  {
+    "md": "[mdSuffix]",
+    "mat": "[matSuffix]"
+  },
+  {
+    "md": "[mdTabLabel]",
+    "mat": "[matTabLabel]"
+  },
+  {
+    "md": "[mdTabLabelWrapper]",
+    "mat": "[matTabLabelWrapper]"
+  },
+  {
+    "md": "[mdTabLink]",
+    "mat": "[matTabLink]"
+  },
+  {
+    "md": "[mdTextareaAutosize]",
+    "mat": "[matTextareaAutosize]",
+    "tagPrefix": "textarea"
+  },
+  {
+    "md": "[mdTooltip]",
+    "mat": "[matTooltip]"
+  }
+]

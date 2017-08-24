@@ -2,11 +2,11 @@ import {Rules, RuleFailure, ProgramAwareRuleWalker} from 'tslint';
 import * as ts from 'typescript';
 import {getOriginalSymbolFromIdentifier} from '../typescript/identifiers';
 import {isExportSpecifierNode, isImportSpecifierNode} from '../typescript/imports';
-import {includesAngularMaterialPrefix} from '../material/prefix';
 import {
   isMaterialImportDeclaration,
   isMaterialExportDeclaration,
 } from '../material/typescript-specifiers';
+import {classNames} from '../material/component-data';
 
 /** Message that is being sent to TSLint if an identifier still uses the outdated prefix. */
 const failureMessage = 'Identifier can be switched from "Md" prefix to "Mat".';
@@ -30,9 +30,9 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
 
   /** Method that is called for every identifier inside of the specified project. */
   visitIdentifier(identifier: ts.Identifier) {
-    // For identifiers that don't include the outdated Material prefix, the whole check can be
+    // For identifiers that aren't listed in the className data, the whole check can be
     // skipped safely.
-    if (!includesAngularMaterialPrefix(identifier.text)) {
+    if (!classNames.some(data => data.md === identifier.text)) {
       return;
     }
 
@@ -61,9 +61,9 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
 
   /** Creates a failure and replacement for the specified identifier. */
   private createIdentifierFailure(identifier: ts.Identifier, symbol: ts.Symbol) {
+    const newClassName = classNames.find(data => data.md === symbol.name).mat;
     const replacement = this.createReplacement(
-      // TODO(devversion): case specific changes
-      identifier.getStart(), identifier.getWidth(), symbol.name.replace(/^Md/, 'Mat'));
+        identifier.getStart(), identifier.getWidth(), newClassName);
 
     this.addFailureAtNode(identifier, failureMessage, replacement);
   }

@@ -1,0 +1,306 @@
+[
+  {
+    "md": "mat-input-container",
+    "mat": "mat-form-field"
+  },
+  {
+    "md": "md-accordion",
+    "mat": "mat-accordion"
+  },
+  {
+    "md": "md-action-row",
+    "mat": "mat-action-row"
+  },
+  {
+    "md": "md-autocomplete",
+    "mat": "mat-autocomplete"
+  },
+  {
+    "md": "md-basic-chip",
+    "mat": "mat-basic-chip"
+  },
+  {
+    "md": "md-basic-chip",
+    "mat": "mat-basic-chip"
+  },
+  {
+    "md": "md-button-toggle",
+    "mat": "mat-button-toggle"
+  },
+  {
+    "md": "md-button-toggle-group",
+    "mat": "mat-button-toggle-group"
+  },
+  {
+    "md": "md-calendar",
+    "mat": "mat-calendar"
+  },
+  {
+    "md": "md-card",
+    "mat": "mat-card"
+  },
+  {
+    "md": "md-card-actions",
+    "mat": "mat-card-actions"
+  },
+  {
+    "md": "md-card-content",
+    "mat": "mat-card-content"
+  },
+  {
+    "md": "md-card-footer",
+    "mat": "mat-card-footer"
+  },
+  {
+    "md": "md-card-header",
+    "mat": "mat-card-header"
+  },
+  {
+    "md": "md-card-subtitle",
+    "mat": "mat-card-subtitle"
+  },
+  {
+    "md": "md-card-title",
+    "mat": "mat-card-title"
+  },
+  {
+    "md": "md-card-title-group",
+    "mat": "mat-card-title-group"
+  },
+  {
+    "md": "md-cell",
+    "mat": "mat-cell"
+  },
+  {
+    "md": "md-checkbox",
+    "mat": "mat-checkbox"
+  },
+  {
+    "md": "md-chip",
+    "mat": "mat-chip"
+  },
+  {
+    "md": "md-chip-list",
+    "mat": "mat-chip-list"
+  },
+  {
+    "md": "md-datepicker",
+    "mat": "mat-datepicker"
+  },
+  {
+    "md": "md-datepicker-content",
+    "mat": "mat-datepicker-content"
+  },
+  {
+    "md": "md-datepicker-toggle",
+    "mat": "mat-datepicker-toggle"
+  },
+  {
+    "md": "md-dialog-actions",
+    "mat": "mat-dialog-actions"
+  },
+  {
+    "md": "md-dialog-container",
+    "mat": "mat-dialog-container"
+  },
+  {
+    "md": "md-dialog-content",
+    "mat": "mat-dialog-content"
+  },
+  {
+    "md": "md-divider",
+    "mat": "mat-divider"
+  },
+  {
+    "md": "md-drawer",
+    "mat": "mat-drawer"
+  },
+  {
+    "md": "md-drawer-container",
+    "mat": "mat-drawer-container"
+  },
+  {
+    "md": "md-error",
+    "mat": "mat-error"
+  },
+  {
+    "md": "md-expansion-panel",
+    "mat": "mat-expansion-panel"
+  },
+  {
+    "md": "md-expansion-panel-header",
+    "mat": "mat-expansion-panel-header"
+  },
+  {
+    "md": "md-form-field",
+    "mat": "mat-form-field"
+  },
+  {
+    "md": "md-grid-list",
+    "mat": "mat-grid-list"
+  },
+  {
+    "md": "md-grid-tile",
+    "mat": "mat-grid-tile"
+  },
+  {
+    "md": "md-header-cell",
+    "mat": "mat-header-cell"
+  },
+  {
+    "md": "md-header-row",
+    "mat": "mat-header-row"
+  },
+  {
+    "md": "md-hint",
+    "mat": "mat-hint"
+  },
+  {
+    "md": "md-icon",
+    "mat": "mat-icon"
+  },
+  {
+    "md": "md-ink-bar",
+    "mat": "mat-ink-bar"
+  },
+  {
+    "md": "md-input-container",
+    "mat": "mat-form-field"
+  },
+  {
+    "md": "md-list",
+    "mat": "mat-list"
+  },
+  {
+    "md": "md-list-item",
+    "mat": "mat-list-item"
+  },
+  {
+    "md": "md-list-option",
+    "mat": "mat-list-option"
+  },
+  {
+    "md": "md-menu",
+    "mat": "mat-menu"
+  },
+  {
+    "md": "md-month-view",
+    "mat": "mat-month-view"
+  },
+  {
+    "md": "md-nav-list",
+    "mat": "mat-nav-list"
+  },
+  {
+    "md": "md-optgroup",
+    "mat": "mat-optgroup"
+  },
+  {
+    "md": "md-option",
+    "mat": "mat-option"
+  },
+  {
+    "md": "md-paginator",
+    "mat": "mat-paginator"
+  },
+  {
+    "md": "md-panel-description",
+    "mat": "mat-panel-description"
+  },
+  {
+    "md": "md-panel-title",
+    "mat": "mat-panel-title"
+  },
+  {
+    "md": "md-placeholder",
+    "mat": "mat-placeholder"
+  },
+  {
+    "md": "md-progress-bar",
+    "mat": "mat-progress-bar"
+  },
+  {
+    "md": "md-progress-spinner",
+    "mat": "mat-progress-spinner"
+  },
+  {
+    "md": "md-pseudo-checkbox",
+    "mat": "mat-pseudo-checkbox"
+  },
+  {
+    "md": "md-radio-button",
+    "mat": "mat-radio-button"
+  },
+  {
+    "md": "md-radio-group",
+    "mat": "mat-radio-group"
+  },
+  {
+    "md": "md-row",
+    "mat": "mat-row"
+  },
+  {
+    "md": "md-select",
+    "mat": "mat-select"
+  },
+  {
+    "md": "md-selection-list",
+    "mat": "mat-selection-list"
+  },
+  {
+    "md": "md-select-trigger",
+    "mat": "mat-select-trigger"
+  },
+  {
+    "md": "md-sidenav",
+    "mat": "mat-sidenav"
+  },
+  {
+    "md": "md-sidenav-container",
+    "mat": "mat-sidenav-container"
+  },
+  {
+    "md": "md-slide-toggle",
+    "mat": "mat-slide-toggle"
+  },
+  {
+    "md": "md-slider",
+    "mat": "mat-slider"
+  },
+  {
+    "md": "md-spinner",
+    "mat": "mat-spinner"
+  },
+  {
+    "md": "md-tab",
+    "mat": "mat-tab"
+  },
+  {
+    "md": "md-tab-body",
+    "mat": "mat-tab-body"
+  },
+  {
+    "md": "md-tab-group",
+    "mat": "mat-tab-group"
+  },
+  {
+    "md": "md-tab-header",
+    "mat": "mat-tab-header"
+  },
+  {
+    "md": "md-table",
+    "mat": "mat-table"
+  },
+  {
+    "md": "md-toolbar",
+    "mat": "mat-toolbar"
+  },
+  {
+    "md": "md-toolbar-row",
+    "mat": "mat-toolbar-row"
+  },
+  {
+    "md": "md-year-view",
+    "mat": "mat-year-view"
+  }
+]

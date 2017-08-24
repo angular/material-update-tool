@@ -1,6 +1,6 @@
 import {Rules, RuleFailure, RuleWalker} from 'tslint';
+import {elementSelectors, attributeSelectors} from "../material/component-data";
 import * as ts from 'typescript';
-import {materialComponentData} from '../material/component-data';
 
 /** Message that is being sent to TSLint if a string literal still uses the outdated prefix. */
 const failureMessage = 'String literal can be switched from "Md" prefix to "Mat".';
@@ -24,18 +24,22 @@ export class SwitchStringLiteralsWalker extends RuleWalker {
       return;
     }
 
-    if (!materialComponentData[stringLiteral.text]) {
-      return;
+    let updatedText = stringLiteral.text;
+
+    [...elementSelectors, ...attributeSelectors].forEach(selector => {
+      updatedText = updatedText.replace(selector.md, selector.mat);
+    });
+
+    if (updatedText !== stringLiteral.text) {
+      // For the replacement the quotation characters of the string literal need to be ignored.
+      // Because of that we need to adjust the start and end position of the replacement.
+      const replacement = this.createReplacement(
+        stringLiteral.getStart() + 1,
+        stringLiteral.getWidth() - 2,
+        updatedText
+      );
+
+      this.addFailureAtNode(stringLiteral, failureMessage, replacement);
     }
-
-    // For the replacement the quotation characters of the string literal need to be ignored.
-    // Because of that we need to adjust the start and end position of the replacement.
-    const replacement = this.createReplacement(
-      stringLiteral.getStart() + 1,
-      stringLiteral.getWidth() - 2,
-      stringLiteral.text.replace(/^md/i, 'mat') // TODO(devversion): case specific changes
-    );
-
-    this.addFailureAtNode(stringLiteral, failureMessage, replacement);
   }
 }

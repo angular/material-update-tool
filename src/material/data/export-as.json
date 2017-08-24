@@ -1,0 +1,58 @@
+[
+  {
+    "md": "mdAutocomplete",
+    "mat": "matAutocomplete"
+  },
+  {
+    "md": "mdButtonToggleGroup",
+    "mat": "matButtonToggleGroup"
+  },
+  {
+    "md": "mdDatepickerInput",
+    "mat": "matDatepickerInput"
+  },
+  {
+    "md": "mdTextareaAutosize",
+    "mat": "matTextareaAutosize"
+  },
+  {
+    "md": "mdChip",
+    "mat": "matChip"
+  },
+  {
+    "md": "mdSelect",
+    "mat": "matSelect"
+  },
+  {
+    "md": "mdChipList",
+    "mat": "matChipList"
+  },
+  {
+    "md": "mdMenuItem",
+    "mat": "matMenuItem"
+  },
+  {
+    "md": "mdTab",
+    "mat": "matTab"
+  },
+  {
+    "md": "mdMenuTrigger",
+    "mat": "matMenuTrigger"
+  },
+  {
+    "md": "mdMenu",
+    "mat": "matMenu"
+  },
+  {
+    "md": "mdRipple",
+    "mat": "matRipple"
+  },
+  {
+    "md": "mdTooltip",
+    "mat": "matTooltip"
+  },
+  {
+    "md": "mdCustomMenu",
+    "mat": "matCustomMenu"
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "md": "md-dynamic-height",
+    "mat": "dynamicHeight"
+  },
+  {
+    "md": "mdChipInputAddOnBlur",
+    "mat": "matChipInputAddOnBlur"
+  },
+  {
+    "md": "mdChipInputSeparatorKeyCodes",
+    "mat": "matChipInputSeparatorKeyCodes"
+  },
+  {
+    "md": "mdDatepickerFilter",
+    "mat": "matDatepickerFilter"
+  },
+  {
+    "md": "mdRippleCentered",
+    "mat": "matRippleCentered"
+  },
+  {
+    "md": "mdRippleColor",
+    "mat": "matRippleColor"
+  },
+  {
+    "md": "mdRippleDisabled",
+    "mat": "matRippleDisabled"
+  },
+  {
+    "md": "mdRippleRadius",
+    "mat": "matRippleRadius"
+  },
+  {
+    "md": "mdRippleSpeedFactor",
+    "mat": "matRippleSpeedFactor"
+  },
+  {
+    "md": "mdRippleTrigger",
+    "mat": "matRippleTrigger"
+  },
+  {
+    "md": "mdRippleUnbounded",
+    "mat": "matRippleUnbounded"
+  },
+  {
+    "md": "mdSortActive",
+    "mat": "matSortActive"
+  },
+  {
+    "md": "mdSortDirection",
+    "mat": "matSortDirection"
+  },
+  {
+    "md": "mdSortDisableClear",
+    "mat": "matSortDisableClear"
+  },
+  {
+    "md": "mdSortStart",
+    "mat": "matSortStart"
+  },
+  {
+    "md": "mdAutosizeMinRows",
+    "mat": "matAutosizeMinRows"
+  },
+  {
+    "md": "mdAutosizeMaxRows",
+    "mat": "matAutosizeMaxRows"
+  },
+  {
+    "md": "mdTooltipClass",
+    "mat": "matTooltipClass"
+  },
+  {
+    "md": "mdTooltipDisabled",
+    "mat": "matTooltipDisabled"
+  },
+  {
+    "md": "mdTooltipHideDelay",
+    "mat": "matTooltipHideDelay"
+  },
+  {
+    "md": "mdTooltipPosition",
+    "mat": "matTooltipPosition"
+  },
+  {
+    "md": "mdTooltipShowDelay",
+    "mat": "matTooltipShowDelay"
+  }
+]

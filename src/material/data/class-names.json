@@ -1,0 +1,986 @@
+[
+  {
+    "md": "MD_AUTOCOMPLETE_SCROLL_STRATEGY",
+    "mat": "MAT_AUTOCOMPLETE_SCROLL_STRATEGY"
+  },
+  {
+    "md": "MD_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER",
+    "mat": "MAT_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER"
+  },
+  {
+    "md": "MD_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER_FACTORY",
+    "mat": "MAT_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER_FACTORY"
+  },
+  {
+    "md": "MD_AUTOCOMPLETE_VALUE_ACCESSOR",
+    "mat": "MAT_AUTOCOMPLETE_VALUE_ACCESSOR"
+  },
+  {
+    "md": "MD_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR",
+    "mat": "MAT_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR"
+  },
+  {
+    "md": "MD_CHECKBOX_CONTROL_VALUE_ACCESSOR",
+    "mat": "MAT_CHECKBOX_CONTROL_VALUE_ACCESSOR"
+  },
+  {
+    "md": "MD_CHECKBOX_REQUIRED_VALIDATOR",
+    "mat": "MAT_CHECKBOX_REQUIRED_VALIDATOR"
+  },
+  {
+    "md": "MD_DATE_FORMATS",
+    "mat": "MAT_DATE_FORMATS"
+  },
+  {
+    "md": "MD_DATEPICKER_SCROLL_STRATEGY",
+    "mat": "MAT_DATEPICKER_SCROLL_STRATEGY"
+  },
+  {
+    "md": "MD_DATEPICKER_SCROLL_STRATEGY_PROVIDER",
+    "mat": "MAT_DATEPICKER_SCROLL_STRATEGY_PROVIDER"
+  },
+  {
+    "md": "MD_DATEPICKER_SCROLL_STRATEGY_PROVIDER_FACTORY",
+    "mat": "MAT_DATEPICKER_SCROLL_STRATEGY_PROVIDER_FACTORY"
+  },
+  {
+    "md": "MD_DATEPICKER_VALIDATORS",
+    "mat": "MAT_DATEPICKER_VALIDATORS"
+  },
+  {
+    "md": "MD_DATEPICKER_VALUE_ACCESSOR",
+    "mat": "MAT_DATEPICKER_VALUE_ACCESSOR"
+  },
+  {
+    "md": "MD_DIALOG_DATA",
+    "mat": "MAT_DIALOG_DATA"
+  },
+  {
+    "md": "MD_DIALOG_SCROLL_STRATEGY",
+    "mat": "MAT_DIALOG_SCROLL_STRATEGY"
+  },
+  {
+    "md": "MD_DIALOG_SCROLL_STRATEGY_PROVIDER",
+    "mat": "MAT_DIALOG_SCROLL_STRATEGY_PROVIDER"
+  },
+  {
+    "md": "MD_DIALOG_SCROLL_STRATEGY_PROVIDER_FACTORY",
+    "mat": "MAT_DIALOG_SCROLL_STRATEGY_PROVIDER_FACTORY"
+  },
+  {
+    "md": "MD_ELEMENTS_SELECTOR",
+    "mat": "MAT_ELEMENTS_SELECTOR"
+  },
+  {
+    "md": "MD_ERROR_GLOBAL_OPTIONS",
+    "mat": "MAT_ERROR_GLOBAL_OPTIONS"
+  },
+  {
+    "md": "MD_MENU_DEFAULT_OPTIONS",
+    "mat": "MAT_MENU_DEFAULT_OPTIONS"
+  },
+  {
+    "md": "MD_NATIVE_DATE_FORMATS",
+    "mat": "MAT_NATIVE_DATE_FORMATS"
+  },
+  {
+    "md": "MD_PLACEHOLDER_GLOBAL_OPTIONS",
+    "mat": "MAT_PLACEHOLDER_GLOBAL_OPTIONS"
+  },
+  {
+    "md": "MD_RADIO_GROUP_CONTROL_VALUE_ACCESSOR",
+    "mat": "MAT_RADIO_GROUP_CONTROL_VALUE_ACCESSOR"
+  },
+  {
+    "md": "MD_RIPPLE_GLOBAL_OPTIONS",
+    "mat": "MAT_RIPPLE_GLOBAL_OPTIONS"
+  },
+  {
+    "md": "MD_SELECT_SCROLL_STRATEGY",
+    "mat": "MAT_SELECT_SCROLL_STRATEGY"
+  },
+  {
+    "md": "MD_SELECT_SCROLL_STRATEGY_PROVIDER",
+    "mat": "MAT_SELECT_SCROLL_STRATEGY_PROVIDER"
+  },
+  {
+    "md": "MD_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY",
+    "mat": "MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY"
+  },
+  {
+    "md": "MD_SLIDE_TOGGLE_VALUE_ACCESSOR",
+    "mat": "MAT_SLIDE_TOGGLE_VALUE_ACCESSOR"
+  },
+  {
+    "md": "MD_SLIDER_VALUE_ACCESSOR",
+    "mat": "MAT_SLIDER_VALUE_ACCESSOR"
+  },
+  {
+    "md": "MD_SNACK_BAR_DATA",
+    "mat": "MAT_SNACK_BAR_DATA"
+  },
+  {
+    "md": "MD_TOOLTIP_SCROLL_STRATEGY",
+    "mat": "MAT_TOOLTIP_SCROLL_STRATEGY"
+  },
+  {
+    "md": "MD_TOOLTIP_SCROLL_STRATEGY_PROVIDER",
+    "mat": "MAT_TOOLTIP_SCROLL_STRATEGY_PROVIDER"
+  },
+  {
+    "md": "MD_TOOLTIP_SCROLL_STRATEGY_PROVIDER_FACTORY",
+    "mat": "MAT_TOOLTIP_SCROLL_STRATEGY_PROVIDER_FACTORY"
+  },
+  {
+    "md": "MdAccordion",
+    "mat": "MatAccordion"
+  },
+  {
+    "md": "MdAccordionDisplayMode",
+    "mat": "MatAccordionDisplayMode"
+  },
+  {
+    "md": "MdAnchor",
+    "mat": "MatAnchor"
+  },
+  {
+    "md": "MdAutocomplete",
+    "mat": "MatAutocomplete"
+  },
+  {
+    "md": "MdAutocompleteModule",
+    "mat": "MatAutocompleteModule"
+  },
+  {
+    "md": "MdAutocompleteTrigger",
+    "mat": "MatAutocompleteTrigger"
+  },
+  {
+    "md": "MdBasicChip",
+    "mat": "MatBasicChip"
+  },
+  {
+    "md": "MdButton",
+    "mat": "MatButton"
+  },
+  {
+    "md": "MdButtonBase",
+    "mat": "MatButtonBase"
+  },
+  {
+    "md": "MdButtonCssMatStyler",
+    "mat": "MatButtonCssMatStyler"
+  },
+  {
+    "md": "MdButtonModule",
+    "mat": "MatButtonModule"
+  },
+  {
+    "md": "MdButtonToggle",
+    "mat": "MatButtonToggle"
+  },
+  {
+    "md": "MdButtonToggleChange",
+    "mat": "MatButtonToggleChange"
+  },
+  {
+    "md": "MdButtonToggleGroup",
+    "mat": "MatButtonToggleGroup"
+  },
+  {
+    "md": "MdButtonToggleGroupBase",
+    "mat": "MatButtonToggleGroupBase"
+  },
+  {
+    "md": "MdButtonToggleGroupMultiple",
+    "mat": "MatButtonToggleGroupMultiple"
+  },
+  {
+    "md": "MdButtonToggleModule",
+    "mat": "MatButtonToggleModule"
+  },
+  {
+    "md": "MdCalendar",
+    "mat": "MatCalendar"
+  },
+  {
+    "md": "MdCalendarBody",
+    "mat": "MatCalendarBody"
+  },
+  {
+    "md": "MdCalendarCell",
+    "mat": "MatCalendarCell"
+  },
+  {
+    "md": "MdCard",
+    "mat": "MatCard"
+  },
+  {
+    "md": "MdCardActions",
+    "mat": "MatCardActions"
+  },
+  {
+    "md": "MdCardAvatar",
+    "mat": "MatCardAvatar"
+  },
+  {
+    "md": "MdCardContent",
+    "mat": "MatCardContent"
+  },
+  {
+    "md": "MdCardFooter",
+    "mat": "MatCardFooter"
+  },
+  {
+    "md": "MdCardHeader",
+    "mat": "MatCardHeader"
+  },
+  {
+    "md": "MdCardImage",
+    "mat": "MatCardImage"
+  },
+  {
+    "md": "MdCardLgImage",
+    "mat": "MatCardLgImage"
+  },
+  {
+    "md": "MdCardMdImage",
+    "mat": "MatCardMatImage"
+  },
+  {
+    "md": "MdCardModule",
+    "mat": "MatCardModule"
+  },
+  {
+    "md": "MdCardSmImage",
+    "mat": "MatCardSmImage"
+  },
+  {
+    "md": "MdCardSubtitle",
+    "mat": "MatCardSubtitle"
+  },
+  {
+    "md": "MdCardTitle",
+    "mat": "MatCardTitle"
+  },
+  {
+    "md": "MdCardTitleGroup",
+    "mat": "MatCardTitleGroup"
+  },
+  {
+    "md": "MdCardXlImage",
+    "mat": "MatCardXlImage"
+  },
+  {
+    "md": "MdCell",
+    "mat": "MatCell"
+  },
+  {
+    "md": "MdCellDef",
+    "mat": "MatCellDef"
+  },
+  {
+    "md": "MdCheckbox",
+    "mat": "MatCheckbox"
+  },
+  {
+    "md": "MdCheckboxBase",
+    "mat": "MatCheckboxBase"
+  },
+  {
+    "md": "MdCheckboxChange",
+    "mat": "MatCheckboxChange"
+  },
+  {
+    "md": "MdCheckboxModule",
+    "mat": "MatCheckboxModule"
+  },
+  {
+    "md": "MdCheckboxRequiredValidator",
+    "mat": "MatCheckboxRequiredValidator"
+  },
+  {
+    "md": "MdChip",
+    "mat": "MatChip"
+  },
+  {
+    "md": "MdChipBase",
+    "mat": "MatChipBase"
+  },
+  {
+    "md": "MdChipEvent",
+    "mat": "MatChipEvent"
+  },
+  {
+    "md": "MdChipInput",
+    "mat": "MatChipInput"
+  },
+  {
+    "md": "MdChipInputEvent",
+    "mat": "MatChipInputEvent"
+  },
+  {
+    "md": "MdChipList",
+    "mat": "MatChipList"
+  },
+  {
+    "md": "MdChipRemove",
+    "mat": "MatChipRemove"
+  },
+  {
+    "md": "MdChipsModule",
+    "mat": "MatChipsModule"
+  },
+  {
+    "md": "MdColumnDef",
+    "mat": "MatColumnDef"
+  },
+  {
+    "md": "MdCommonModule",
+    "mat": "MatCommonModule"
+  },
+  {
+    "md": "MdCoreModule",
+    "mat": "MatCoreModule"
+  },
+  {
+    "md": "MdDateFormats",
+    "mat": "MatDateFormats"
+  },
+  {
+    "md": "MdDatepicker",
+    "mat": "MatDatepicker"
+  },
+  {
+    "md": "MdDatepickerContent",
+    "mat": "MatDatepickerContent"
+  },
+  {
+    "md": "MdDatepickerInput",
+    "mat": "MatDatepickerInput"
+  },
+  {
+    "md": "MdDatepickerInputEvent",
+    "mat": "MatDatepickerInputEvent"
+  },
+  {
+    "md": "MdDatepickerIntl",
+    "mat": "MatDatepickerIntl"
+  },
+  {
+    "md": "MdDatepickerModule",
+    "mat": "MatDatepickerModule"
+  },
+  {
+    "md": "MdDatepickerToggle",
+    "mat": "MatDatepickerToggle"
+  },
+  {
+    "md": "MdDialog",
+    "mat": "MatDialog"
+  },
+  {
+    "md": "MdDialogActions",
+    "mat": "MatDialogActions"
+  },
+  {
+    "md": "MdDialogClose",
+    "mat": "MatDialogClose"
+  },
+  {
+    "md": "MdDialogConfig",
+    "mat": "MatDialogConfig"
+  },
+  {
+    "md": "MdDialogContainer",
+    "mat": "MatDialogContainer"
+  },
+  {
+    "md": "MdDialogContent",
+    "mat": "MatDialogContent"
+  },
+  {
+    "md": "MdDialogModule",
+    "mat": "MatDialogModule"
+  },
+  {
+    "md": "MdDialogRef",
+    "mat": "MatDialogRef"
+  },
+  {
+    "md": "MdDialogTitle",
+    "mat": "MatDialogTitle"
+  },
+  {
+    "md": "MdDividerCssMatStyler",
+    "mat": "MatDividerCssMatStyler"
+  },
+  {
+    "md": "MdDrawerToggleResult",
+    "mat": "MatDrawerToggleResult"
+  },
+  {
+    "md": "MdDrawer",
+    "mat": "MatDrawer"
+  },
+  {
+    "md": "MdDrawerContainer",
+    "mat": "MatDrawerContainer"
+  },
+  {
+    "md": "MdExpansionModule",
+    "mat": "MatExpansionModule"
+  },
+  {
+    "md": "MdExpansionPanel",
+    "mat": "MatExpansionPanel"
+  },
+  {
+    "md": "MdExpansionPanelActionRow",
+    "mat": "MatExpansionPanelActionRow"
+  },
+  {
+    "md": "MdExpansionPanelDescription",
+    "mat": "MatExpansionPanelDescription"
+  },
+  {
+    "md": "MdExpansionPanelHeader",
+    "mat": "MatExpansionPanelHeader"
+  },
+  {
+    "md": "MdExpansionPanelState",
+    "mat": "MatExpansionPanelState"
+  },
+  {
+    "md": "MdExpansionPanelTitle",
+    "mat": "MatExpansionPanelTitle"
+  },
+  {
+    "md": "MdFab",
+    "mat": "MatFab"
+  },
+  {
+    "md": "MdGridList",
+    "mat": "MatGridList"
+  },
+  {
+    "md": "MdGridListModule",
+    "mat": "MatGridListModule"
+  },
+  {
+    "md": "MdGridTile",
+    "mat": "MatGridTile"
+  },
+  {
+    "md": "MdHeaderCell",
+    "mat": "MatHeaderCell"
+  },
+  {
+    "md": "MdHeaderCellDef",
+    "mat": "MatHeaderCellDef"
+  },
+  {
+    "md": "MdHeaderRow",
+    "mat": "MatHeaderRow"
+  },
+  {
+    "md": "MdHeaderRowDef",
+    "mat": "MatHeaderRowDef"
+  },
+  {
+    "md": "MdIcon",
+    "mat": "MatIcon"
+  },
+  {
+    "md": "MdIconBase",
+    "mat": "MatIconBase"
+  },
+  {
+    "md": "MdIconButtonCssMatStyler",
+    "mat": "MatIconButtonCssMatStyler"
+  },
+  {
+    "md": "MdIconModule",
+    "mat": "MatIconModule"
+  },
+  {
+    "md": "MdIconRegistry",
+    "mat": "MatIconRegistry"
+  },
+  {
+    "md": "MdInkBar",
+    "mat": "MatInkBar"
+  },
+  {
+    "md": "MdInput",
+    "mat": "MatInput"
+  },
+  {
+    "md": "MdInputModule",
+    "mat": "MatInputModule"
+  },
+  {
+    "md": "MdLine",
+    "mat": "MatLine"
+  },
+  {
+    "md": "MdLineModule",
+    "mat": "MatLineModule"
+  },
+  {
+    "md": "MdLineSetter",
+    "mat": "MatLineSetter"
+  },
+  {
+    "md": "MdList",
+    "mat": "MatList"
+  },
+  {
+    "md": "MdListAvatarCssMatStyler",
+    "mat": "MatListAvatarCssMatStyler"
+  },
+  {
+    "md": "MdListBase",
+    "mat": "MatListBase"
+  },
+  {
+    "md": "MdListCssMatStyler",
+    "mat": "MatListCssMatStyler"
+  },
+  {
+    "md": "MdListDivider",
+    "mat": "MatListDivider"
+  },
+  {
+    "md": "MdListIconCssMatStyler",
+    "mat": "MatListIconCssMatStyler"
+  },
+  {
+    "md": "MdListItem",
+    "mat": "MatListItem"
+  },
+  {
+    "md": "MdListItemBase",
+    "mat": "MatListItemBase"
+  },
+  {
+    "md": "MdListModule",
+    "mat": "MatListModule"
+  },
+  {
+    "md": "MdListOption",
+    "mat": "MatListOption"
+  },
+  {
+    "md": "MdListSubheaderCssMatStyler",
+    "mat": "MatListSubheaderCssMatStyler"
+  },
+  {
+    "md": "MdMenu",
+    "mat": "MatMenu"
+  },
+  {
+    "md": "MdMenuDefaultOptions",
+    "mat": "MatMenuDefaultOptions"
+  },
+  {
+    "md": "MdMenuItem",
+    "mat": "MatMenuItem"
+  },
+  {
+    "md": "MdMenuModule",
+    "mat": "MatMenuModule"
+  },
+  {
+    "md": "MdMenuPanel",
+    "mat": "MatMenuPanel"
+  },
+  {
+    "md": "MdMenuTrigger",
+    "mat": "MatMenuTrigger"
+  },
+  {
+    "md": "MdMiniFab",
+    "mat": "MatMiniFab"
+  },
+  {
+    "md": "MdMonthView",
+    "mat": "MatMonthView"
+  },
+  {
+    "md": "MdNativeDateModule",
+    "mat": "MatNativeDateModule"
+  },
+  {
+    "md": "MdNavListCssMatStyler",
+    "mat": "MatNavListCssMatStyler"
+  },
+  {
+    "md": "MdOptgroup",
+    "mat": "MatOptgroup"
+  },
+  {
+    "md": "MdOptgroupBase",
+    "mat": "MatOptgroupBase"
+  },
+  {
+    "md": "MdOption",
+    "mat": "MatOption"
+  },
+  {
+    "md": "MdOptionModule",
+    "mat": "MatOptionModule"
+  },
+  {
+    "md": "MdOptionSelectionChange",
+    "mat": "MatOptionSelectionChange"
+  },
+  {
+    "md": "MdPaginator",
+    "mat": "MatPaginator"
+  },
+  {
+    "md": "MdPaginatorIntl",
+    "mat": "MatPaginatorIntl"
+  },
+  {
+    "md": "MdPaginatorModule",
+    "mat": "MatPaginatorModule"
+  },
+  {
+    "md": "MdPrefixRejector",
+    "mat": "MatPrefixRejector"
+  },
+  {
+    "md": "MdProgressBar",
+    "mat": "MatProgressBar"
+  },
+  {
+    "md": "MdProgressBarModule",
+    "mat": "MatProgressBarModule"
+  },
+  {
+    "md": "MdProgressSpinner",
+    "mat": "MatProgressSpinner"
+  },
+  {
+    "md": "MdProgressSpinnerBase",
+    "mat": "MatProgressSpinnerBase"
+  },
+  {
+    "md": "MdProgressSpinnerCssMatStyler",
+    "mat": "MatProgressSpinnerCssMatStyler"
+  },
+  {
+    "md": "MdProgressSpinnerModule",
+    "mat": "MatProgressSpinnerModule"
+  },
+  {
+    "md": "MdPseudoCheckbox",
+    "mat": "MatPseudoCheckbox"
+  },
+  {
+    "md": "MdPseudoCheckboxState",
+    "mat": "MatPseudoCheckboxState"
+  },
+  {
+    "md": "MdRadioButton",
+    "mat": "MatRadioButton"
+  },
+  {
+    "md": "MdRadioButtonBase",
+    "mat": "MatRadioButtonBase"
+  },
+  {
+    "md": "MdRadioChange",
+    "mat": "MatRadioChange"
+  },
+  {
+    "md": "MdRadioGroup",
+    "mat": "MatRadioGroup"
+  },
+  {
+    "md": "MdRadioGroupBase",
+    "mat": "MatRadioGroupBase"
+  },
+  {
+    "md": "MdRadioModule",
+    "mat": "MatRadioModule"
+  },
+  {
+    "md": "MdRaisedButtonCssMatStyler",
+    "mat": "MatRaisedButtonCssMatStyler"
+  },
+  {
+    "md": "MdRipple",
+    "mat": "MatRipple"
+  },
+  {
+    "md": "MdRippleModule",
+    "mat": "MatRippleModule"
+  },
+  {
+    "md": "MdRow",
+    "mat": "MatRow"
+  },
+  {
+    "md": "MdRowDef",
+    "mat": "MatRowDef"
+  },
+  {
+    "md": "MdSelect",
+    "mat": "MatSelect"
+  },
+  {
+    "md": "MdSelectBase",
+    "mat": "MatSelectBase"
+  },
+  {
+    "md": "MdSelectChange",
+    "mat": "MatSelectChange"
+  },
+  {
+    "md": "MdSelectionList",
+    "mat": "MatSelectionList"
+  },
+  {
+    "md": "MdSelectionListBase",
+    "mat": "MatSelectionListBase"
+  },
+  {
+    "md": "MdSelectionListOptionEvent",
+    "mat": "MatSelectionListOptionEvent"
+  },
+  {
+    "md": "MdSelectionModule",
+    "mat": "MatSelectionModule"
+  },
+  {
+    "md": "MdSelectModule",
+    "mat": "MatSelectModule"
+  },
+  {
+    "md": "MdSelectTrigger",
+    "mat": "MatSelectTrigger"
+  },
+  {
+    "md": "MdSidenav",
+    "mat": "MatSidenav"
+  },
+  {
+    "md": "MdSidenavContainer",
+    "mat": "MatSidenavContainer"
+  },
+  {
+    "md": "MdSidenavModule",
+    "mat": "MatSidenavModule"
+  },
+  {
+    "md": "MdSidenavToggleResult",
+    "mat": "MatSidenavToggleResult"
+  },
+  {
+    "md": "MdSlider",
+    "mat": "MatSlider"
+  },
+  {
+    "md": "MdSliderBase",
+    "mat": "MatSliderBase"
+  },
+  {
+    "md": "MdSliderChange",
+    "mat": "MatSliderChange"
+  },
+  {
+    "md": "MdSliderModule",
+    "mat": "MatSliderModule"
+  },
+  {
+    "md": "MdSlideToggle",
+    "mat": "MatSlideToggle"
+  },
+  {
+    "md": "MdSlideToggleBase",
+    "mat": "MatSlideToggleBase"
+  },
+  {
+    "md": "MdSlideToggleChange",
+    "mat": "MatSlideToggleChange"
+  },
+  {
+    "md": "MdSlideToggleModule",
+    "mat": "MatSlideToggleModule"
+  },
+  {
+    "md": "MdSnackBar",
+    "mat": "MatSnackBar"
+  },
+  {
+    "md": "MdSnackBarConfig",
+    "mat": "MatSnackBarConfig"
+  },
+  {
+    "md": "MdSnackBarContainer",
+    "mat": "MatSnackBarContainer"
+  },
+  {
+    "md": "MdSnackBarModule",
+    "mat": "MatSnackBarModule"
+  },
+  {
+    "md": "MdSnackBarRef",
+    "mat": "MatSnackBarRef"
+  },
+  {
+    "md": "MdSort",
+    "mat": "MatSort"
+  },
+  {
+    "md": "MdSortable",
+    "mat": "MatSortable"
+  },
+  {
+    "md": "MdSortHeader",
+    "mat": "MatSortHeader"
+  },
+  {
+    "md": "MdSortHeaderIntl",
+    "mat": "MatSortHeaderIntl"
+  },
+  {
+    "md": "MdSortModule",
+    "mat": "MatSortModule"
+  },
+  {
+    "md": "MdSpinner",
+    "mat": "MatSpinner"
+  },
+  {
+    "md": "MdTab",
+    "mat": "MatTab"
+  },
+  {
+    "md": "MdTabBody",
+    "mat": "MatTabBody"
+  },
+  {
+    "md": "MdTabBodyOriginState",
+    "mat": "MatTabBodyOriginState"
+  },
+  {
+    "md": "MdTabBodyPositionState",
+    "mat": "MatTabBodyPositionState"
+  },
+  {
+    "md": "MdTabChangeEvent",
+    "mat": "MatTabChangeEvent"
+  },
+  {
+    "md": "MdTabGroup",
+    "mat": "MatTabGroup"
+  },
+  {
+    "md": "MdTabGroupBase",
+    "mat": "MatTabGroupBase"
+  },
+  {
+    "md": "MdTabHeader",
+    "mat": "MatTabHeader"
+  },
+  {
+    "md": "MdTabHeaderPosition",
+    "mat": "MatTabHeaderPosition"
+  },
+  {
+    "md": "MdTabLabel",
+    "mat": "MatTabLabel"
+  },
+  {
+    "md": "MdTabLabelWrapper",
+    "mat": "MatTabLabelWrapper"
+  },
+  {
+    "md": "MdTable",
+    "mat": "MatTable"
+  },
+  {
+    "md": "MdTableModule",
+    "mat": "MatTableModule"
+  },
+  {
+    "md": "MdTabLink",
+    "mat": "MatTabLink"
+  },
+  {
+    "md": "MdTabNav",
+    "mat": "MatTabNav"
+  },
+  {
+    "md": "MdTabsModule",
+    "mat": "MatTabsModule"
+  },
+  {
+    "md": "MdTextareaAutosize",
+    "mat": "MatTextareaAutosize"
+  },
+  {
+    "md": "MdToolbar",
+    "mat": "MatToolbar"
+  },
+  {
+    "md": "MdToolbarBase",
+    "mat": "MatToolbarBase"
+  },
+  {
+    "md": "MdToolbarModule",
+    "mat": "MatToolbarModule"
+  },
+  {
+    "md": "MdToolbarRow",
+    "mat": "MatToolbarRow"
+  },
+  {
+    "md": "MdTooltip",
+    "mat": "MatTooltip"
+  },
+  {
+    "md": "MdTooltipModule",
+    "mat": "MatTooltipModule"
+  },
+  {
+    "md": "MdYearView",
+    "mat": "MatYearView"
+  },
+  {
+    "md": "MdFormFieldModule",
+    "mat": "MatFormFieldModule"
+  },
+  {
+    "md": "MdError",
+    "mat": "MatError"
+  },
+  {
+    "md": "MdFormField",
+    "mat": "MatFormField"
+  },
+  {
+    "md": "MdFormFieldControl",
+    "mat": "MatFormFieldControl"
+  },
+  {
+    "md": "MdHint",
+    "mat": "MatHint"
+  },
+  {
+    "md": "MdPlaceholder",
+    "mat": "MatPlaceholder"
+  },
+  {
+    "md": "MdPrefix",
+    "mat": "MatPrefix"
+  },
+  {
+    "md": "MdSuffix",
+    "mat": "MatSuffix"
+  }
+]
