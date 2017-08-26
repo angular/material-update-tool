@@ -2,6 +2,7 @@
   "rulesDirectory": ["./"],
   "rules": {
     "switch-identifiers": true,
-    "switch-string-literals": true
+    "switch-string-literals": true,
+    "switch-templates": true
   }
 }

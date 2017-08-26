@@ -1,5 +1,5 @@
 import {option, help, argv} from 'yargs';
-import {red, green} from 'chalk';
+import {red, green, yellow} from 'chalk';
 import {statSync, existsSync} from 'fs';
 import {join} from 'path';
 import {spawnSync} from 'child_process';
@@ -25,6 +25,13 @@ option('verbose', {
   required: false
 });
 
+option('dryrun', {
+  alias: 'dr',
+  describe: 'Whether the tool should run in dry-run mode.',
+  boolean: true,
+  required: false
+});
+
 /** Path to the TypeScript project. */
 let projectPath: string = argv.project;
 
@@ -43,8 +50,17 @@ if (projectPath) {
   const tslintBin = resolveBin('tslint');
   const migrationConfig = join(__dirname, 'rules', 'tslint-migration.json');
 
+  // Command line arguments for dispatching the TSLint executable.
+  const tslintArgs = ['-c', migrationConfig, '-p', projectPath];
+
+  if (!argv.dryrun) {
+    tslintArgs.push('--fix');
+  } else {
+    console.info(yellow('Running the tool in dry-run mode...'));
+  }
+
   // Run the TSLint CLI with the configuration file from the migration tool.
-  const output = spawnSync('node', [tslintBin, '-c', migrationConfig, '-p', projectPath, '--fix']);
+  const output = spawnSync('node', [tslintBin, ...tslintArgs]);
 
   // If verbose mode is enabled, print the stdout output from the child process.
   if (argv.verbose) {

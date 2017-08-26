@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc -p ./ && npm run copy-files",
     "copy-files": "cpy \"**/*.json\" ../dist --parents --cwd ./src/",
-    "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v"
+    "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v",
+    "debug-dry": "npm run build && node dist/cli -p test/fixtures/sample-project -v --dr"
   },
   "author": "",
   "license": "MIT",
