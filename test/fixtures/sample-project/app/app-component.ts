@@ -8,6 +8,9 @@ export class AppComponent {}
 
 @Component({
   selector: 'md-test-component',
-  template: '<span>This is a test</span>'
+  template: `
+    <span>This is a test</span>
+    <md-slide-toggle>Test</md-slide-toggle>
+  `
 })
 export class TestComponent {}

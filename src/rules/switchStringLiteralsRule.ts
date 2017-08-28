@@ -24,20 +24,15 @@ export class SwitchStringLiteralsWalker extends RuleWalker {
       return;
     }
 
-    let updatedText = stringLiteral.text;
+    let updatedText = stringLiteral.getText();
 
     [...elementSelectors, ...attributeSelectors].forEach(selector => {
       updatedText = updatedText.replace(selector.md, selector.mat);
     });
 
-    if (updatedText !== stringLiteral.text) {
-      // For the replacement the quotation characters of the string literal need to be ignored.
-      // Because of that we need to adjust the start and end position of the replacement.
-      const replacement = this.createReplacement(
-        stringLiteral.getStart() + 1,
-        stringLiteral.getWidth() - 2,
-        updatedText
-      );
+    if (updatedText !== stringLiteral.getText()) {
+      const replacement = this.createReplacement(stringLiteral.getStart(),
+          stringLiteral.getWidth(), updatedText);
 
       this.addFailureAtNode(stringLiteral, failureMessage, replacement);
     }

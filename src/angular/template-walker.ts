@@ -1,7 +1,7 @@
 /**
  * TSLint custom walker implementation that also visits external and inline templates.
  */
-import {RuleWalker} from 'tslint';
+import {Fix, RuleFailure, RuleWalker} from 'tslint';
 import {createTemplateFile, ExternalTemplate} from './template-file';
 import {getLiteralTextWithoutQuotes} from '../typescript/literal';
 import {join, dirname} from 'path';
@@ -59,4 +59,11 @@ export class TemplateWalker extends RuleWalker {
   protected visitInlineTemplate(template: ts.StringLiteral) {}
 
   protected visitExternalTemplate(template: ExternalTemplate) {}
+
+  protected addTemplateFailure(template: ExternalTemplate, failureMessage: string, fix?: Fix) {
+    const ruleFailure = new RuleFailure(template,template.getStart(), template.getEnd(),
+        failureMessage, this.getRuleName(), fix);
+
+    this.addFailure(ruleFailure);
+  }
 }
