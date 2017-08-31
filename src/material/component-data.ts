@@ -27,3 +27,6 @@ export const exportAsNames: MaterialNameData[] = require('./data/export-as-names
 /** Export the attribute selectors data as part of a module. This means that the data is cached. */
 export const attributeSelectors: MaterialAttributeSelector[] =
   require('./data/attribute-selectors.json');
+
+/** Method that can be used to remove the surrounding Angular attribute brackets from a string. */
+export const removeAttributeBackets = (str) => str.substring(1, str.length - 1);

@@ -1,5 +1,9 @@
 import {Rules, RuleFailure, RuleWalker} from 'tslint';
-import {elementSelectors, attributeSelectors} from "../material/component-data";
+import {
+  elementSelectors,
+  attributeSelectors,
+  removeAttributeBackets
+} from "../material/component-data";
 import * as ts from 'typescript';
 
 /** Message that is being sent to TSLint if a string literal still uses the outdated prefix. */
@@ -26,9 +30,18 @@ export class SwitchStringLiteralsWalker extends RuleWalker {
 
     let updatedText = stringLiteral.getText();
 
-    [...elementSelectors, ...attributeSelectors].forEach(selector => {
+    elementSelectors.forEach(selector => {
       updatedText = updatedText.replace(selector.md, selector.mat);
     });
+
+
+    attributeSelectors.forEach(attribute => {
+      updatedText = updatedText.replace(
+        removeAttributeBackets(attribute.md),
+        removeAttributeBackets(attribute.mat)
+      );
+    });
+
 
     if (updatedText !== stringLiteral.getText()) {
       const replacement = this.createReplacement(stringLiteral.getStart(),

@@ -2,8 +2,7 @@ import {Rules, RuleFailure} from 'tslint';
 import {TemplateWalker} from '../tslint/template-walker';
 import {ExternalTemplate} from '../tslint/template-file';
 import {
-  attributeSelectors, elementSelectors, exportAsNames,
-  inputNames
+  attributeSelectors, elementSelectors, exportAsNames, inputNames, removeAttributeBackets
 } from '../material/component-data';
 import * as ts from 'typescript';
 
@@ -12,9 +11,6 @@ import * as ts from 'typescript';
  * outdated prefix.
  */
 const failureMessage = 'Template uses outdated Material prefix.';
-
-/** Method that can be used to remove the surrounding Angular attribute brackets from a string. */
-const removeAttributeBackets = (str) => str.substring(1, str.length - 1);
 
 /**
  * Rule that walks through every string literal, which includes the outdated Material prefix and
