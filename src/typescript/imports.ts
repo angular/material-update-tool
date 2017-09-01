@@ -2,45 +2,40 @@ import * as ts from 'typescript';
 
 /** Checks whether the given node is part of an import specifier node. */
 export function isImportSpecifierNode(node: ts.Node) {
-  if (node.kind === ts.SyntaxKind.ImportSpecifier) {
-    return true;
-  }
-
-  if (node.kind === ts.SyntaxKind.SourceFile) {
-    return false;
-  }
-
-  return isImportSpecifierNode(node.parent);
+  return isPartOfKind(node, ts.SyntaxKind.ImportSpecifier);
 }
 
 /** Checks whether the given node is part of an export specifier node. */
 export function isExportSpecifierNode(node: ts.Node) {
-  if (node.kind === ts.SyntaxKind.ExportSpecifier) {
-    return true;
-  }
-
-  if (node.kind === ts.SyntaxKind.SourceFile) {
-    return false;
-  }
-
-  return isExportSpecifierNode(node.parent);
+  return isPartOfKind(node, ts.SyntaxKind.ExportSpecifier);
 }
 
 /** Finds the parent import declaration of a given TypeScript node. */
 export function getImportDeclaration(node: ts.Node) {
-  while (node.kind !== ts.SyntaxKind.ImportDeclaration) {
-    node = node.parent;
-  }
-
-  return node as ts.ImportDeclaration;
+  return findDeclaration(node, ts.SyntaxKind.ImportDeclaration) as ts.ImportDeclaration;
 }
 
 /** Finds the parent export declaration of a given TypeScript node */
 export function getExportDeclaration(node: ts.Node) {
-  while (node.kind !== ts.SyntaxKind.ExportDeclaration) {
+  return findDeclaration(node, ts.SyntaxKind.ExportDeclaration) as ts.ExportDeclaration;
+}
+
+/** Finds the specified declaration for the given node by walking up the TypeScript nodes. */
+function findDeclaration<T extends ts.SyntaxKind>(node: ts.Node, kind: T) {
+  while (node.kind !== kind) {
     node = node.parent;
   }
 
-  return node as ts.ExportDeclaration;
+  return node;
+}
 
+/** Checks whether the given node is part of another TypeScript Node with the specified kind. */
+function isPartOfKind<T extends ts.SyntaxKind>(node: ts.Node, kind: T): boolean {
+  if (node.kind === kind) {
+    return true;
+  } else if (node.kind === ts.SyntaxKind.SourceFile) {
+    return false;
+  }
+
+  return isPartOfKind(node.parent, kind);
 }

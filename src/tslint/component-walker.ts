@@ -8,6 +8,10 @@ import {createComponentFile, ExternalResource} from "./component-file";
 import {readFileSync, existsSync} from 'fs'
 import * as ts from 'typescript';
 
+/**
+ * Custom TSLint rule walker that identifies Angular components and visits specific parts of
+ * the component metadata.
+ */
 export class ComponentWalker extends RuleWalker {
 
   protected visitInlineTemplate(template: ts.StringLiteral) {}

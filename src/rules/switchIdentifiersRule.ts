@@ -39,7 +39,7 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
     const originalSymbol = getOriginalSymbolFromIdentifier(identifier, this.getTypeChecker());
 
     // For export declarations that are referring to Angular Material, the identifier should be
-    // switched to the new prefix as well.
+    // switched to the new prefix.
     if (isExportSpecifierNode(identifier) && isMaterialExportDeclaration(identifier)) {
       return this.createIdentifierFailure(identifier, originalSymbol);
     }
@@ -51,7 +51,7 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
     }
 
     // For identifiers that are not part of an import or export, the list of Material declarations
-    // should be checked to ensure that the current identifier is part of Angular Material.
+    // should be checked to ensure that only identifiers of Angular Material are updated.
     else if (this.materialDeclarations.indexOf(originalSymbol.valueDeclaration) === -1) {
       return;
     }

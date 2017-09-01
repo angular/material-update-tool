@@ -22,7 +22,6 @@ export class Rule extends Rules.AbstractRule {
 
 export class SwitchStringLiteralsWalker extends RuleWalker {
 
-  /** Method that is called for every string literal inside of the specified project. */
   visitStringLiteral(stringLiteral: ts.StringLiteral) {
     if (stringLiteral.parent.kind !== ts.SyntaxKind.CallExpression) {
       return;
@@ -34,14 +33,12 @@ export class SwitchStringLiteralsWalker extends RuleWalker {
       updatedText = updatedText.replace(selector.md, selector.mat);
     });
 
-
     attributeSelectors.forEach(attribute => {
       updatedText = updatedText.replace(
         removeAttributeBackets(attribute.md),
         removeAttributeBackets(attribute.mat)
       );
     });
-
 
     if (updatedText !== stringLiteral.getText()) {
       const replacement = this.createReplacement(stringLiteral.getStart(),
