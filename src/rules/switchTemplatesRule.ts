@@ -5,6 +5,7 @@ import {
 import {ComponentWalker} from '../tslint/component-walker';
 import {ExternalResource} from '../tslint/component-file';
 import * as ts from 'typescript';
+import {replaceAll} from '../typescript/literal';
 
 /**
  * Message that is being sent to TSLint if there is something in the template that still use an
@@ -52,26 +53,17 @@ export class SwitchTemplatesWalker extends ComponentWalker {
    */
   private replacePrefixesInTemplate(templateContent: string): string {
     elementSelectors.forEach(selector => {
-      // Replace every HTMLElement with an outdated "md" prefix in the template.
-      // To ensure only elements match, the leading tag opening symbol will be replaced as well.
-      // Manually replacing by strings should be faster than creating a RegExp each selector.
-      templateContent = templateContent.replace(`<${selector.md}`, `<${selector.mat}`);
-      templateContent = templateContent.replace(`</${selector.md}`, `</${selector.mat}`);
+      templateContent = templateContent.replace(
+          new RegExp(`(</?)${selector.md}`, 'g'), `$1${selector.mat}`);
     });
 
     attributeSelectors.forEach(attribute => {
-      templateContent = templateContent.replace(
-        removeAttributeBackets(attribute.md),
-        removeAttributeBackets(attribute.mat)
-      );
+      templateContent = replaceAll(templateContent,
+          removeAttributeBackets(attribute.md), removeAttributeBackets(attribute.mat));
     });
 
-    inputNames.forEach(input => {
-      templateContent = templateContent.replace(input.md, input.mat);
-    });
-
-    exportAsNames.forEach(exportName => {
-      templateContent = templateContent.replace(exportName.md, exportName.mat);
+    [...inputNames, ...exportAsNames].forEach(selector => {
+      templateContent = replaceAll(templateContent, selector.md, selector.mat);
     });
 
     return templateContent;

@@ -20,10 +20,6 @@ export class ComponentWalker extends RuleWalker {
   protected visitExternalTemplate(template: ExternalResource) {}
   protected visitExternalStylesheet(stylesheet: ExternalResource) {}
 
-  walk(sourceFile: ts.SourceFile) {
-    super.walk(sourceFile);
-  }
-
   visitNode(node: ts.Node) {
     if (node.kind === ts.SyntaxKind.CallExpression) {
       const callExpression = node as ts.CallExpression;

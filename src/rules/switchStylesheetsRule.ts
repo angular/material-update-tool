@@ -3,6 +3,7 @@ import * as ts from 'typescript';
 import {ComponentWalker} from '../tslint/component-walker';
 import {ExternalResource} from '../tslint/component-file';
 import {attributeSelectors, elementSelectors, inputNames} from '../material/component-data';
+import {replaceAll} from '../typescript/literal';
 
 /**
  * Message that is being sent to TSLint if there is something in the stylesheet that still use an
@@ -50,16 +51,12 @@ export class SwitchStylesheetsWalker extends ComponentWalker {
    * stylesheet.
    */
   private replacePrefixesInStylesheet(stylesheetContent: string): string {
-    elementSelectors.forEach(selector => {
-      stylesheetContent = stylesheetContent.replace(selector.md, selector.mat);
-    });
-
-    attributeSelectors.forEach(attribute => {
-      stylesheetContent = stylesheetContent.replace(attribute.md, attribute.mat);
+    [...elementSelectors, ...attributeSelectors].forEach(selector => {
+      stylesheetContent = replaceAll(stylesheetContent, selector.md, selector.mat);
     });
 
     inputNames.forEach(input => {
-      stylesheetContent = stylesheetContent.replace(`[${input.md}]`, `[${input.mat}]`);
+      stylesheetContent = replaceAll(stylesheetContent, `[${input.md}]`, `[${input.mat}]`);
     });
 
     return stylesheetContent;

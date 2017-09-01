@@ -5,6 +5,7 @@ import {
   removeAttributeBackets
 } from "../material/component-data";
 import * as ts from 'typescript';
+import {replaceAll} from '../typescript/literal';
 
 /** Message that is being sent to TSLint if a string literal still uses the outdated prefix. */
 const failureMessage = 'String literal can be switched from "Md" prefix to "Mat".';
@@ -30,14 +31,12 @@ export class SwitchStringLiteralsWalker extends RuleWalker {
     let updatedText = stringLiteral.getText();
 
     elementSelectors.forEach(selector => {
-      updatedText = updatedText.replace(selector.md, selector.mat);
+      updatedText = replaceAll(updatedText, selector.md, selector.mat);
     });
 
     attributeSelectors.forEach(attribute => {
-      updatedText = updatedText.replace(
-        removeAttributeBackets(attribute.md),
-        removeAttributeBackets(attribute.mat)
-      );
+      updatedText = replaceAll(updatedText,
+          removeAttributeBackets(attribute.md), removeAttributeBackets(attribute.mat));
     });
 
     if (updatedText !== stringLiteral.getText()) {

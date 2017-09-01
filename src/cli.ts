@@ -62,15 +62,13 @@ if (projectPath) {
   // Run the TSLint CLI with the configuration file from the migration tool.
   const output = spawnSync('node', [tslintBin, ...tslintArgs]);
 
-  // If verbose mode is enabled, print the stdout output from the child process.
-  if (argv.verbose) {
-    console.info(`\n${output.stdout.toString()}\n`);
-  }
-
-  if (output.status !== 0) {
-    console.error(`\n${output.stderr.toString()}\n`);
+  if (output.status !== 0 || output.stderr.toString().trim()) {
+    console.error(output.output.join('\n').trim());
+    console.error();
     console.error(red('Errors occurred while migrating the Angular Material project.'));
   } else {
+    console.info(output.stdout.toString().trim());
+    console.info();
     console.info(green('Successfully updated the project source files.'))
   }
 }
