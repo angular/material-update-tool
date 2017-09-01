@@ -1,0 +1,7 @@
+button[md-button] {
+  text-transform: none;
+}
+
+md-slide-toggle {
+  font-size: 12px;
+}

@@ -1,9 +1,9 @@
 import {Rules, RuleFailure} from 'tslint';
-import {TemplateWalker} from '../tslint/template-walker';
-import {ExternalTemplate} from '../tslint/template-file';
 import {
   attributeSelectors, elementSelectors, exportAsNames, inputNames, removeAttributeBackets
 } from '../material/component-data';
+import {ComponentWalker} from '../tslint/component-walker';
+import {ExternalResource} from '../tslint/component-file';
 import * as ts from 'typescript';
 
 /**
@@ -13,8 +13,8 @@ import * as ts from 'typescript';
 const failureMessage = 'Template uses outdated Material prefix.';
 
 /**
- * Rule that walks through every string literal, which includes the outdated Material prefix and
- * is part of a call expression. Those string literals will be changed to the new prefix.
+ * Rule that walks through every component decorator and updates their inline or external
+ * templates.
  */
 export class Rule extends Rules.AbstractRule {
 
@@ -23,7 +23,7 @@ export class Rule extends Rules.AbstractRule {
   }
 }
 
-export class SwitchTemplatesWalker extends TemplateWalker {
+export class SwitchTemplatesWalker extends ComponentWalker {
 
   visitInlineTemplate(template: ts.StringLiteral) {
     const newTemplateText = this.replacePrefixesInTemplate(template.getText());
@@ -36,14 +36,14 @@ export class SwitchTemplatesWalker extends TemplateWalker {
     }
   }
 
-  visitExternalTemplate(template: ExternalTemplate) {
+  visitExternalTemplate(template: ExternalResource) {
     const newTemplateText = this.replacePrefixesInTemplate(template.getFullText());
 
     if (newTemplateText !== template.getFullText()) {
       const replacement = this.createReplacement(template.getStart(), template.getWidth(),
           newTemplateText);
 
-      this.addTemplateFailure(template, failureMessage, replacement);
+      this.addExternalResourceFailure(template, failureMessage, replacement);
     }
   }
 

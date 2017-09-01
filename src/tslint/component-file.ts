@@ -1,8 +1,8 @@
 import * as ts from 'typescript';
 
-export type ExternalTemplate = ts.SourceFile;
+export type ExternalResource = ts.SourceFile;
 
-export function createTemplateFile(filePath: string, content: string): ExternalTemplate {
+export function createComponentFile(filePath: string, content: string): ExternalResource {
   const sourceFile = ts.createSourceFile(filePath, `\`${content}\``, ts.ScriptTarget.ES5);
   const _getFullText = sourceFile.getFullText;
 
