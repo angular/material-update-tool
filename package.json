@@ -6,13 +6,13 @@
   "scripts": {
     "build": "tsc -p ./ && npm run copy-files",
     "copy-files": "cpy \"**/*.json\" ../dist --parents --cwd ./src/",
-    "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v",
-    "debug-dry": "npm run build && node dist/cli -p test/fixtures/sample-project -v --dr"
+    "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v --es test/fixtures/**/*.css"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.0.1",
+    "glob": "^7.1.2",
     "resolve-bin": "^0.4.0",
     "tslint": "^5.7.0",
     "typescript": "^2.4.2",
@@ -25,6 +25,7 @@
     "@angular/material": "github:angular/material2-builds",
     "@angular/platform-browser": "^4.3.3",
     "@types/chalk": "^0.4.31",
+    "@types/glob": "^5.0.32",
     "@types/jasmine": "^2.5.53",
     "@types/node": "^8.0.17",
     "@types/yargs": "^8.0.1",

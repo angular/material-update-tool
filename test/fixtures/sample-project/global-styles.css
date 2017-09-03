@@ -1,0 +1,7 @@
+/*
+ * This is a global stylesheet in the sample application.
+ */
+
+md-sidenav-container {
+  background: red;
+}
