@@ -61,9 +61,15 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
 
   /** Creates a failure and replacement for the specified identifier. */
   private createIdentifierFailure(identifier: ts.Identifier, symbol: ts.Symbol) {
-    const newClassName = classNames.find(data => data.md === symbol.name).mat;
+    const classData = classNames.find(data => data.md === symbol.name);
+
+    if (!classData) {
+     console.error(`Could not find updated prefix for identifier (${identifier.getText()}).`);
+     return;
+    }
+
     const replacement = this.createReplacement(
-        identifier.getStart(), identifier.getWidth(), newClassName);
+        identifier.getStart(), identifier.getWidth(), classData.mat);
 
     this.addFailureAtNode(identifier, failureMessage, replacement);
   }

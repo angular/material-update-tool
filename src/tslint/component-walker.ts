@@ -36,7 +36,7 @@ export class ComponentWalker extends RuleWalker {
   private _visitDirectiveCallExpression(callExpression: ts.CallExpression) {
     const directiveMetadata = callExpression.arguments[0] as ts.ObjectLiteralExpression;
 
-    for (const property of directiveMetadata.properties as ts.PropertyAssignment[]) {
+    for (const property of directiveMetadata.properties as ts.NodeArray<ts.PropertyAssignment>) {
       const propertyName = property.name.getText();
       const initializerKind = property.initializer.kind;
 
