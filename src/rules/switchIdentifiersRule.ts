@@ -64,8 +64,8 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
     const classData = classNames.find(data => data.md === symbol.name);
 
     if (!classData) {
-     console.error(`Could not find updated prefix for identifier (${identifier.getText()}).`);
-     return;
+      console.error(`Could not find updated prefix for identifier (${identifier.getText()}).`);
+      return;
     }
 
     const replacement = this.createReplacement(

@@ -60,14 +60,14 @@ if (projectPath) {
   const output = spawnSync('node', [tslintBin, ...tslintArgs], {env: childProcessEnv});
 
   if (output.status !== 0 || output.stderr.toString().trim()) {
-    console.error();
-    console.error(output.output.join('\n').trim());
+    console.error(`\n${output.output.join('\n').trim()}\n`);
+    console.error(yellow('Make sure the following things are done correctly:'));
+    console.error(yellow(' • Angular Material is installed in the project (for type checking)'));
+    console.error(yellow(' • Project "tsconfig.json" configuration matches the desired files.'));
     console.error();
     console.error(red('Errors occurred while migrating the Angular Material project.'));
   } else {
-    console.info();
-    console.info(output.stdout.toString().trim());
-    console.info();
+    console.info(`\n${output.stdout.toString().trim()}\n`);
     console.info(green('Successfully updated the project source files.'))
   }
 }
