@@ -19,3 +19,20 @@ mat-switcher -p path/to/project/tsconfig.json
 # accepts a glob pointing to the style files
 mat-switcher -p path/to/project/tsconfig.json --extra-css 'custom/**/*.css' 
 ```
+
+## After running the tool
+After running the tool, add a provider to the root of your application:
+```ts
+import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
+
+@NgModule({
+  providers: [
+    {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
+    // ...
+  ],
+})
+export class MyModule { }
+
+```
+
+This will enforce that only the "mat" prefix is used for all selectors.
