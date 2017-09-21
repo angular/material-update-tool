@@ -58,10 +58,7 @@ export class SwitchStylesheetsWalker extends ComponentWalker {
   visitExternalStylesheet(stylesheet: ExternalResource) {
     const newStylesheetText = this.replacePrefixesInStylesheet(stylesheet.getFullText());
 
-
     if (newStylesheetText !== stylesheet.getFullText()) {
-
-
       const replacement = this.createReplacement(stylesheet.getStart(), stylesheet.getWidth(),
           newStylesheetText);
 

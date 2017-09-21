@@ -53,8 +53,10 @@ export class SwitchTemplatesWalker extends ComponentWalker {
    */
   private replacePrefixesInTemplate(templateContent: string): string {
     elementSelectors.forEach(selector => {
-      templateContent = templateContent.replace(
-          new RegExp(`(</?)${selector.md}`, 'g'), `$1${selector.mat}`);
+      // Being more aggressive with that replacement here allows us to also handle inline
+      // style elements. Normally we would check if the selector is surrounded by the HTML tag
+      // characters.
+      templateContent = replaceAll(templateContent, selector.md, selector.mat);
     });
 
     attributeSelectors.forEach(attribute => {
@@ -68,6 +70,5 @@ export class SwitchTemplatesWalker extends ComponentWalker {
 
     return templateContent;
   }
-
 
 }
