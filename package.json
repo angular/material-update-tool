@@ -10,7 +10,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "tsc -p ./ && npm run copy-files && cp package.json ./dist",
+    "build": "tsc -p ./ && npm run copy-files && cp package.json ./dist && cp README.md ./dist",
     "copy-files": "cpy \"**/*.json\" ../dist --parents --cwd ./src/ && cpy package.json dist/",
     "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v --es test/fixtures/**/*.css"
   },
