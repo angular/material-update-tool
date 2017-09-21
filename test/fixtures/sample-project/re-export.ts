@@ -1,1 +1,1 @@
-export {MdSlideToggleModule as Lol} from '@angular/material';
+export {MdSlideToggleModule as SlideToggleCustom} from '@angular/material';
