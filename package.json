@@ -14,7 +14,9 @@
     "copy-files": "cpy \"**/*.json\" ../dist --parents --cwd ./src/ && cpy package.json dist/",
     "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v --es test/fixtures/**/*.css"
   },
-  "bin": "./cli.js",
+  "bin": {
+    "mat-switcher": "./cli.js"
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {
