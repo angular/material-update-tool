@@ -3,12 +3,10 @@
 import {option, help, argv} from 'yargs';
 import {red, green, yellow} from 'chalk';
 import {statSync, existsSync} from 'fs';
-import {join} from 'path';
+import {resolve} from 'path';
 import {spawnSync} from 'child_process';
 import {EXTRA_STYLESHEETS_GLOB_KEY} from './rules/switchStylesheetsRule';
-
-// This import lacks of type definitions.
-const resolveBin = require('resolve-bin').sync;
+import {findTslintBinaryPath} from './tslint/find-tslint-binary';
 
 // Register a help page in yargs.
 help();
@@ -44,8 +42,8 @@ if (statSync(projectPath).isDirectory()) {
 }
 
 if (projectPath) {
-  const tslintBin = resolveBin('tslint');
-  const migrationConfig = join(__dirname, 'rules', 'tslint-migration.json');
+  const tslintBin = findTslintBinaryPath();
+  const migrationConfig = resolve(__dirname, 'rules', 'tslint-migration.json');
 
   // Command line arguments for dispatching the TSLint executable.
   const tslintArgs = ['-c', migrationConfig, '-p', projectPath, '--fix'];
