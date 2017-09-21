@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import {option, help, argv} from 'yargs';
 import {red, green, yellow} from 'chalk';
 import {statSync, existsSync} from 'fs';
