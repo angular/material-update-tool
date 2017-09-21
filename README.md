@@ -2,7 +2,7 @@
 
 ## Installation
 ```bash
-npm i angular-material-prefix-updater
+npm i -g angular-material-prefix-updater
 ```
 
 ## Usage
