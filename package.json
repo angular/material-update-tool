@@ -1,6 +1,6 @@
 {
   "name": "angular-material-prefix-updater",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Switches the `Md` prefix to `Mat` in Angular Material apps",
   "homepage": "https://github.com/angular/material-prefix-updater",
   "bugs": "https://github.com/angular/material-prefix-updater/issues",
