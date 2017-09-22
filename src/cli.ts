@@ -1,12 +1,13 @@
 #! /usr/bin/env node
 
 import {option, help, argv} from 'yargs';
-import {red, green, yellow} from 'chalk';
+import {red, yellow} from 'chalk';
 import {statSync, existsSync} from 'fs';
 import {resolve} from 'path';
-import {spawnSync} from 'child_process';
+import {spawn} from 'child_process';
 import {EXTRA_STYLESHEETS_GLOB_KEY} from './rules/switchStylesheetsRule';
 import {findTslintBinaryPath} from './tslint/find-tslint-binary';
+import * as ora from 'ora';
 
 // Register a help page in yargs.
 help();
@@ -42,7 +43,6 @@ if (statSync(projectPath).isDirectory()) {
 }
 
 if (projectPath) {
-  const tslintBin = findTslintBinaryPath();
   const migrationConfig = resolve(__dirname, 'rules', 'tslint-migration.json');
 
   // Command line arguments for dispatching the TSLint executable.
@@ -56,18 +56,40 @@ if (projectPath) {
     childProcessEnv[EXTRA_STYLESHEETS_GLOB_KEY] = argv.extraStylesheets.join(' ');
   }
 
-  // Run the TSLint CLI with the configuration file from the migration tool.
-  const output = spawnSync('node', [tslintBin, ...tslintArgs], {env: childProcessEnv});
+  migrateProject(tslintArgs, childProcessEnv);
+}
 
-  if (output.status !== 0 || output.stderr.toString().trim()) {
-    console.error(`\n${output.output.join('\n').trim()}\n`);
-    console.error(yellow('Make sure the following things are done correctly:'));
-    console.error(yellow(' • Angular Material is installed in the project (for type checking)'));
-    console.error(yellow(' • Project "tsconfig.json" configuration matches the desired files.'));
-    console.error();
-    console.error(red('Errors occurred while migrating the Angular Material project.'));
-  } else {
-    console.info(`\n${output.stdout.toString().trim()}\n`);
-    console.info(green('Successfully updated the project source files.'))
-  }
+/** Starts the migration of the specified project in the TSLint arguments. */
+function migrateProject(tslintArgs: string[], env?: any) {
+  const tslintBin = findTslintBinaryPath();
+  const spinner = ora('Migrating the specified Angular Material project').start();
+
+  // Run the TSLint CLI with the configuration file from the migration tool.
+  const tslintProcess = spawn('node', [tslintBin, ...tslintArgs], {env});
+
+  let stdout = '';
+  let stderr = '';
+
+  tslintProcess.stdout.on('data', data => stdout += data.toString());
+  tslintProcess.stderr.on('data', data => stderr += data.toString());
+
+  tslintProcess.on('close', status => {
+    // Clear the spinner output before printing messages, because Ora is not able to clear the
+    // spinner properly if there is console output after the previous spinner output.
+    spinner.clear();
+
+    if (status !== 0 || stderr.trim()) {
+      console.error(`\n${stderr.trim()}\n`);
+      console.error(yellow('Make sure the following things are done correctly:'));
+      console.error(yellow(' • Angular Material is installed in the project (for type checking)'));
+      console.error(yellow(' • Project "tsconfig.json" configuration matches the desired files.'));
+      console.error();
+      spinner.fail('Errors occurred while migrating the Angular Material project.');
+    } else {
+      if (stdout.trim()) {
+        console.info(`\n${stdout.trim()}\n`);
+      }
+      spinner.succeed('Successfully updated the project source files.')
+    }
+  });
 }
