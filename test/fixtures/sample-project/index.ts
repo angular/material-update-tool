@@ -1,13 +1,16 @@
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app/app-component';
-import {MdCheckboxModule} from '@angular/material'
-import {SlideToggleCustom} from './re-export';
+import {MdButtonToggleModule, MdDatepickerModule} from '@angular/material'
+import {MyAppMaterialModule} from './material.module';
 
 @NgModule({
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent
+  ],
   imports: [
-    SlideToggleCustom,
-    MdCheckboxModule,
+    MyAppMaterialModule,
+    MdButtonToggleModule,
+    MdDatepickerModule
   ]
 })
 export class MdSampleProjectModule {}

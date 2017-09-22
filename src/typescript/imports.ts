@@ -10,6 +10,11 @@ export function isExportSpecifierNode(node: ts.Node) {
   return isPartOfKind(node, ts.SyntaxKind.ExportSpecifier);
 }
 
+/** Checks whether the given node is part of a namespace import. */
+export function isNamespaceImportNode(node: ts.Node) {
+  return isPartOfKind(node, ts.SyntaxKind.NamespaceImport);
+}
+
 /** Finds the parent import declaration of a given TypeScript node. */
 export function getImportDeclaration(node: ts.Node) {
   return findDeclaration(node, ts.SyntaxKind.ImportDeclaration) as ts.ImportDeclaration;

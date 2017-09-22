@@ -1,7 +1,11 @@
 import {Rules, RuleFailure, ProgramAwareRuleWalker} from 'tslint';
 import * as ts from 'typescript';
-import {getOriginalSymbolFromIdentifier} from '../typescript/identifiers';
-import {isExportSpecifierNode, isImportSpecifierNode} from '../typescript/imports';
+import {getOriginalSymbolFromNode} from '../typescript/identifiers';
+import {
+  isExportSpecifierNode,
+  isImportSpecifierNode,
+  isNamespaceImportNode
+} from '../typescript/imports';
 import {
   isMaterialImportDeclaration,
   isMaterialExportDeclaration,
@@ -28,15 +32,25 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
   /** List of Angular Material declarations inside of the current source file. */
   materialDeclarations: ts.Declaration[] = [];
 
+  /** List of Angular Material namespace declarations in the current source file. */
+  materialNamespaceDeclarations: ts.Declaration[] = [];
+
   /** Method that is called for every identifier inside of the specified project. */
   visitIdentifier(identifier: ts.Identifier) {
+    // In some situations, developers will import Angular Material completely using a namespace
+    // import. This is not recommended, but should be still handled in the migration tool.
+    if (isNamespaceImportNode(identifier) && isMaterialImportDeclaration(identifier)) {
+      const symbol = getOriginalSymbolFromNode(identifier, this.getTypeChecker());
+      return this.materialNamespaceDeclarations.push(symbol.valueDeclaration);
+    }
+
     // For identifiers that aren't listed in the className data, the whole check can be
     // skipped safely.
     if (!classNames.some(data => data.md === identifier.text)) {
       return;
     }
 
-    const originalSymbol = getOriginalSymbolFromIdentifier(identifier, this.getTypeChecker());
+    const originalSymbol = getOriginalSymbolFromNode(identifier, this.getTypeChecker());
 
     // For export declarations that are referring to Angular Material, the identifier should be
     // switched to the new prefix.
@@ -52,7 +66,9 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
 
     // For identifiers that are not part of an import or export, the list of Material declarations
     // should be checked to ensure that only identifiers of Angular Material are updated.
-    else if (this.materialDeclarations.indexOf(originalSymbol.valueDeclaration) === -1) {
+    // Identifiers that are imported through an Angular Material namespace will be updated.
+    else if (this.materialDeclarations.indexOf(originalSymbol.valueDeclaration) === -1 &&
+              !this._isIdentifierFromNamespace(identifier)) {
       return;
     }
 
@@ -72,5 +88,18 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
         identifier.getStart(), identifier.getWidth(), classData.mat);
 
     this.addFailureAtNode(identifier, failureMessage, replacement);
+  }
+
+  /** Checks whether the given identifier is part of the Material namespace. */
+  private _isIdentifierFromNamespace(identifier: ts.Identifier) {
+    if (identifier.parent.kind !== ts.SyntaxKind.PropertyAccessExpression) {
+      return;
+    }
+
+    const propertyExpression = identifier.parent as ts.PropertyAccessExpression;
+    const expressionSymbol = getOriginalSymbolFromNode(propertyExpression.expression,
+        this.getTypeChecker());
+
+    return this.materialNamespaceDeclarations.indexOf(expressionSymbol.valueDeclaration) !== -1;
   }
 }

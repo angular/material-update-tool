@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 
-/** Returns the original symbol from an identifier. */
-export function getOriginalSymbolFromIdentifier(node: ts.Identifier, checker: ts.TypeChecker) {
+/** Returns the original symbol from an node. */
+export function getOriginalSymbolFromNode(node: ts.Node, checker: ts.TypeChecker) {
   const baseSymbol = checker.getSymbolAtLocation(node);
 
   if (baseSymbol && baseSymbol.flags & ts.SymbolFlags.Alias) {
