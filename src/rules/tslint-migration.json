@@ -4,6 +4,7 @@
     "switch-identifiers": true,
     "switch-string-literals": true,
     "switch-templates": true,
-    "switch-stylesheets": true
+    "switch-stylesheets": true,
+    "switch-property-names": true
   }
 }

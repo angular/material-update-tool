@@ -86,5 +86,9 @@
   {
     "md": "mdTooltipShowDelay",
     "mat": "matTooltipShowDelay"
+  },
+  {
+    "md": "mdSortChange",
+    "mat": "matSortChange"
   }
 ]
