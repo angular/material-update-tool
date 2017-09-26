@@ -38,6 +38,7 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
   /** Method that is called for every identifier inside of the specified project. */
   visitIdentifier(identifier: ts.Identifier) {
     // Store Angular Material namespace identifers in a list of declarations.
+    // Namespace identifiers can be: `import * as md from '@angular/material';`
     this._storeNamespaceImports(identifier);
 
     // For identifiers that aren't listed in the className data, the whole check can be
