@@ -4,6 +4,9 @@
 ```bash
 npm i -g angular-material-prefix-updater
 ```
+**Note**: Running this tool with Angular Material versions higher than `beta.11` will not work. The prefix updater tool requires type information from the outdated `Md` classes. 
+
+The upgrade to the latest version of Angular Material should happen after running the tool.
 
 ## Usage
 
