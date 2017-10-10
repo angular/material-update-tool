@@ -1,5 +1,5 @@
 import {Rules, RuleFailure, ProgramAwareRuleWalker} from 'tslint';
-import * as ts from 'typescript';
+import {relative} from 'path';
 import {getOriginalSymbolFromNode} from '../typescript/identifiers';
 import {
   isExportSpecifierNode,
@@ -11,6 +11,7 @@ import {
   isMaterialExportDeclaration,
 } from '../material/typescript-specifiers';
 import {classNames} from '../material/component-data';
+import * as ts from 'typescript';
 
 /** Message that is being sent to TSLint if an identifier still uses the outdated prefix. */
 const failureMessage = 'Identifier can be switched from "Md" prefix to "Mat".';
@@ -51,7 +52,9 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
 
     // If the symbol is not defined or could not be resolved, just skip the following identifier
     // checks.
-    if (!symbol) {
+    if (!symbol || !symbol.name || symbol.name === 'unknown') {
+      console.error(`Could not resolve symbol for identifier "${identifier.text}" ` + 
+          `in file ${this._getRelativeFileName()}`);
       return;
     }
 
@@ -83,7 +86,8 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
     const classData = classNames.find(data => data.md === symbol.name);
 
     if (!classData) {
-      console.error(`Could not find updated prefix for identifier (${identifier.getText()}).`);
+      console.error(`Could not find updated prefix for identifier "${identifier.getText()}" in ` + 
+          ` in file ${this._getRelativeFileName()}.`);
       return;
     }
 
@@ -117,5 +121,10 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
         this.getTypeChecker());
 
     return this.materialNamespaceDeclarations.indexOf(expressionSymbol.valueDeclaration) !== -1;
+  }
+
+  /** Returns the current source file path relative to the root directory of the project. */
+  private _getRelativeFileName(): string {
+    return relative(this.getProgram().getCurrentDirectory(), this.getSourceFile().fileName);
   }
 }

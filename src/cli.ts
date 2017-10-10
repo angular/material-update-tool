@@ -82,7 +82,8 @@ function migrateProject(tslintArgs: string[], env?: any) {
       console.error(`\n${stderr.trim()}\n`);
       console.error(yellow('Make sure the following things are done correctly:'));
       console.error(yellow(' • Angular Material is installed in the project (for type checking)'));
-      console.error(yellow(' • Project "tsconfig.json" configuration matches the desired files.'));
+      console.error(yellow(' • The Angular Material version is not higher than "beta.11"'))      
+      console.error(yellow(' • Project "tsconfig.json" configuration matches the desired files'));
       console.error();
       spinner.fail('Errors occurred while migrating the Angular Material project.');
     } else {
