@@ -300,5 +300,9 @@
   {
     "md": "[mdTooltip]",
     "mat": "[matTooltip]"
+  },
+  {
+    "md": "[mdStepper]",
+    "mat": "[matStepper]"
   }
 ]

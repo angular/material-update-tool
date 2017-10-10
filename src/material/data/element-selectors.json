@@ -302,5 +302,17 @@
   {
     "md": "md-year-view",
     "mat": "mat-year-view"
+  },
+  {
+    "md": "md-step",
+    "mat": "mat-step"
+  },
+  {
+    "md": "md-horizontal-stepper",
+    "mat": "mat-horizontal-stepper"
+  },
+  {
+    "md": "md-vertical-stepper",
+    "mat": "mat-vertical-stepper"
   }
 ]

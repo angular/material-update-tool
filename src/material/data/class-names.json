@@ -982,5 +982,33 @@
   {
     "md": "MdSuffix",
     "mat": "MatSuffix"
+  },
+  {
+    "md": "MdStepHeader",
+    "mat": "MatStepHeader"
+  },
+  {
+    "md": "MdStepLabel",
+    "mat": "MatStepLabel"
+  },
+  {
+    "md": "MdStep",
+    "mat": "MatStep"
+  },
+  {
+    "md": "MdStepper",
+    "mat": "MatStepper"
+  },
+  {
+    "md": "MdHorizontalStepper",
+    "mat": "MatHorizontalStepper"
+  },
+  {
+    "md": "MdVerticalStepper",
+    "mat": "MatVerticalStepper"
+  },
+  {
+    "md": "MdStepperModule",
+    "mat": "MatStepperModule"
   }
 ]
