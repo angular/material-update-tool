@@ -13,12 +13,12 @@ import {
 import {classNames} from '../material/component-data';
 import * as ts from 'typescript';
 
-/** Message that is being sent to TSLint if an identifier still uses the outdated prefix. */
-const failureMessage = 'Identifier can be switched from "Md" prefix to "Mat".';
+/** Message that is being sent to TSLint if an identifier still uses the outdated name. */
+const failureMessage = 'Deprecated identifier can be updated.';
 
 /**
  * Rule that walks through every identifier that is part of Angular Material and replaces the
- * outdated prefix with the new one.
+ * outdated name with the new one.
  */
 export class Rule extends Rules.TypedRule {
 
@@ -44,7 +44,7 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
 
     // For identifiers that aren't listed in the className data, the whole check can be
     // skipped safely.
-    if (!classNames.some(data => data.md === identifier.text)) {
+    if (!classNames.some(data => data.replace === identifier.text)) {
       return;
     }
 
@@ -59,7 +59,7 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
     }
 
     // For export declarations that are referring to Angular Material, the identifier should be
-    // switched to the new prefix.
+    // switched to the new name.
     if (isExportSpecifierNode(identifier) && isMaterialExportDeclaration(identifier)) {
       return this.createIdentifierFailure(identifier, symbol);
     }
@@ -83,16 +83,17 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
 
   /** Creates a failure and replacement for the specified identifier. */
   private createIdentifierFailure(identifier: ts.Identifier, symbol: ts.Symbol) {
-    const classData = classNames.find(data => data.md === symbol.name);
+    let classData = classNames.find(
+        data => data.replace === symbol.name || data.replace === identifier.text);
 
     if (!classData) {
-      console.error(`Could not find updated prefix for identifier "${identifier.getText()}" in ` + 
+      console.error(`Could not find updated name for identifier "${identifier.getText()}" in ` +
           ` in file ${this._getRelativeFileName()}.`);
       return;
     }
 
     const replacement = this.createReplacement(
-        identifier.getStart(), identifier.getWidth(), classData.mat);
+        identifier.getStart(), identifier.getWidth(), classData.replaceWith);
 
     this.addFailureAtNode(identifier, failureMessage, replacement);
   }

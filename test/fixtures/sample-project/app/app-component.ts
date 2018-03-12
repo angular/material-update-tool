@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {ConnectedOverlayDirective} from '@angular/cdk/overlay';
+import {Component, ElementRef, EventEmitter, ViewChild} from '@angular/core';
+import {MAT_PLACEHOLDER_GLOBAL_OPTIONS, MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'md-app-component',
@@ -9,21 +11,46 @@ export class AppComponent {}
 
 @Component({
   selector: 'md-test-component',
-  template: `
-    <span>This is a test</span>
-    <md-slide-toggle>Test</md-slide-toggle>
+  template: `      
+    <!-- This line should be changed: -->
+    <mat-radio-group align="start"></mat-radio-group>
   `,
   styles: [
     `
-      md-checkbox {
+      mat-checkbox {
         font-weight: bold;
       }
     `,
     `
-      button[md-button] {
+      button[mat-button] {
         text-transform: none;
       }
     `
   ]
 })
-export class TestComponent {}
+export class TestComponent {
+  @ViewChild('cod') cod: ConnectedOverlayDirective;
+  @ViewChild('snav') snav: MatSidenav;
+
+  thing = new MyThing();
+
+  constructor(el: ElementRef) {
+    let cods = [this.cod];
+
+    // These lines should be changed:
+    this.cod._deprecatedBackdropClass = 'test';
+    let stuff = this.snav.onAlignChanged;
+    cods[0]._deprecatedHeight = 1;
+    let x = MAT_PLACEHOLDER_GLOBAL_OPTIONS;
+    let y = el.nativeElement.querySelector('mat-form-field');
+
+    // These lines should not be changed:
+    this.thing._deprecatedBackdropClass = 'test';
+    stuff = this.thing.onAlignChanged;
+  }
+}
+
+class MyThing {
+  _deprecatedBackdropClass: string;
+  onAlignChanged = new EventEmitter<void>();
+}

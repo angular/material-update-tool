@@ -1,18 +1,14 @@
-import {Rules, RuleFailure, RuleWalker} from 'tslint';
-import {
-  elementSelectors,
-  attributeSelectors,
-  removeAttributeBackets
-} from "../material/component-data";
+import {RuleFailure, Rules, RuleWalker} from 'tslint';
 import * as ts from 'typescript';
+import {attributeSelectors, cssNames, elementSelectors} from "../material/component-data";
 import {replaceAll} from '../typescript/literal';
 
-/** Message that is being sent to TSLint if a string literal still uses the outdated prefix. */
-const failureMessage = 'String literal can be switched from "Md" prefix to "Mat".';
+/** Message that is being sent to TSLint if a string literal still uses the outdated name. */
+const failureMessage = 'Deprecated string literal value can be updated.';
 
 /**
- * Rule that walks through every string literal, which includes the outdated Material prefix and
- * is part of a call expression. Those string literals will be changed to the new prefix.
+ * Rule that walks through every string literal, which includes the outdated Material name and
+ * is part of a call expression. Those string literals will be changed to the new name.
  */
 export class Rule extends Rules.AbstractRule {
 
@@ -30,13 +26,14 @@ export class SwitchStringLiteralsWalker extends RuleWalker {
 
     let updatedText = stringLiteral.getText();
 
-    elementSelectors.forEach(selector => {
-      updatedText = replaceAll(updatedText, selector.md, selector.mat);
+    [...elementSelectors, ...attributeSelectors].forEach(selector => {
+      updatedText = replaceAll(updatedText, selector.replace, selector.replaceWith);
     });
 
-    attributeSelectors.forEach(attribute => {
-      updatedText = replaceAll(updatedText,
-          removeAttributeBackets(attribute.md), removeAttributeBackets(attribute.mat));
+    cssNames.forEach(name => {
+      if (!name.whitelist || name.whitelist.strings) {
+        updatedText = replaceAll(updatedText, name.replace, name.replaceWith);
+      }
     });
 
     if (updatedText !== stringLiteral.getText()) {

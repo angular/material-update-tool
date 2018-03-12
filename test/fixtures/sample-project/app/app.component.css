@@ -1,7 +1,6 @@
-button[md-button] {
-  text-transform: none;
-}
+/* These lines should be changed: */
+.mat-input-container {}
+[cdkPortalHost] {}
 
-md-slide-toggle {
-  font-size: 12px;
-}
+/* These lines should not be changed: */
+[origin] {}
