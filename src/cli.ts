@@ -46,7 +46,7 @@ if (projectPath) {
   const migrationConfig = resolve(__dirname, 'rules', 'tslint-migration.json');
 
   // Command line arguments for dispatching the TSLint executable.
-  const tslintArgs = ['-c', migrationConfig, '-p', projectPath, '--fix'];
+  const tslintArgs = ['-c', migrationConfig, '-p', projectPath];
   const childProcessEnv = { ...process.env };
 
   if (argv.extraStylesheets) {

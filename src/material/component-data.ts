@@ -86,6 +86,15 @@ export interface MaterialOutputNameData {
   }
 }
 
+export interface MaterialMethodCallData {
+  className: string;
+  method: string;
+  invalidArgCounts: {
+    count: number,
+    message: string
+  }[]
+}
+
 type Changes<T> = {
   pr: string;
   changes: T[]
@@ -119,5 +128,8 @@ export const attributeSelectors =
 /** Export the property names as part of a module. This means that the data is cached. */
 export const propertyNames =
     getChanges<MaterialPropertyNameData>(require('./data/property-names.json'));
+
+export const methodCallChecks =
+    getChanges<MaterialMethodCallData>(require('./data/method-call-checks.json'));
 
 export const cssNames = getChanges<MaterialCssNameData>(require('./data/css-names.json'));

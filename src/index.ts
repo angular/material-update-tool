@@ -1,3 +1,5 @@
+export {Rule as CheckInheritanceRule} from './rules/checkInheritanceRule';
+export {Rule as CheckMethodCallsRule} from './rules/checkMethodCallsRule';
 export {Rule as SwitchIdentifiersRule} from './rules/switchIdentifiersRule';
 export {Rule as SwitchPropertyNamesRule} from './rules/switchPropertyNamesRule';
 export {Rule as SwitchStringLiteralAttributeSelectorsRule} from './rules/switchStringLiteralAttributeSelectorsRule';

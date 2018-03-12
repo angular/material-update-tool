@@ -1,6 +1,7 @@
+import {FocusMonitor} from '@angular/cdk/a11y';
 import {ConnectedOverlayDirective} from '@angular/cdk/overlay';
 import {Component, ElementRef, EventEmitter, ViewChild} from '@angular/core';
-import {MAT_PLACEHOLDER_GLOBAL_OPTIONS, MatSidenav} from '@angular/material';
+import {MAT_PLACEHOLDER_GLOBAL_OPTIONS, MatSidenav, NativeDateAdapter} from '@angular/material';
 
 @Component({
   selector: 'md-app-component',
@@ -37,7 +38,8 @@ export class TestComponent {
 
   thing = new MyThing();
 
-  constructor(el: ElementRef) {
+  constructor(el: ElementRef, fm: FocusMonitor) {
+    fm.monitor(el.nativeElement, null, true);
     let cods = [this.cod];
 
     // These lines should be changed:
@@ -56,4 +58,10 @@ export class TestComponent {
 class MyThing {
   _deprecatedBackdropClass: string;
   onAlignChanged = new EventEmitter<void>();
+}
+
+class MySidenav extends MatSidenav {}
+
+class MyDateAdapter extends NativeDateAdapter {
+  constructor() { super(null); }
 }
