@@ -1,15 +1,29 @@
-<md-slide-toggle>
-  This is a slide-toggle component
-</md-slide-toggle>
+<!-- These lines should be changed: -->
+<ng-template cdk-connected-overlay [origin]=""></ng-template>
+<ng-template connected-overlay origin stuff></ng-template>
+<ng-template connected-overlay origin></ng-template>
+<ng-template cdkConnectedOverlay
+             origin = "hello"></ng-template>
+<ng-template origin=blah cdk-connected-overlay></ng-template>
+<ng-template [origin] = "blah"
+             cdk-connected-overlay></ng-template>
+<mat-select (change)></mat-select>
+<mat-select (change)="" stuff></mat-select>
+<div class="mat-input-container"></div>
+<mat-input-container></mat-input-container>
+<mat-basic-chip (destroyed)=""">
+<div mat-basic-chip (destroyed)=""></div>
+<div mat-chip="stuff" (remove)=""></div>
 
-<div md-ripple [mdRippleCentered]="true">
-  Test Ripple
-</div>
-
-<md-checkbox>This text includes the "Md" text.</md-checkbox>
-
-<style>
-  md-slide-toggle {
-    background: red;
-  }
-</style>
+<!-- These lines should not be changed: -->
+<ng-template my-connected-overlay origin=""></ng-template>
+<ng-template origin="" my-connected-overlay></ng-template>
+<ng-template origin="connected-overlay"></ng-template>
+<ng-template connected-overlay="origin"></ng-template>
+<ng-template blah="connected-overlay" origin></ng-template>
+<ng-template connected-overlay blah="origin"></ng-template>
+<ng-template connected-overlay-stuff origin=""></ng-template>
+<ng-template connected-overlay origin-stuff=""></ng-template>
+<mat-select change></mat-select>
+<mat-select-stuff (change)></mat-select-stuff>
+<mat-select (change-stuff)></mat-select>

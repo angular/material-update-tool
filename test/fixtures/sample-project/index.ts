@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app/app-component';
-import {MdButtonToggleModule, MdDatepickerModule} from '@angular/material'
+import {MatButtonToggleModule, MatDatepickerModule} from '@angular/material'
 import {MyAppMaterialModule} from './material.module';
 
 @NgModule({
@@ -9,8 +9,8 @@ import {MyAppMaterialModule} from './material.module';
   ],
   imports: [
     MyAppMaterialModule,
-    MdButtonToggleModule,
-    MdDatepickerModule
+    MatButtonToggleModule,
+    MatDatepickerModule
   ]
 })
 export class MdSampleProjectModule {}

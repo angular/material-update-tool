@@ -1,94 +1,203 @@
 [
   {
-    "md": "md-dynamic-height",
-    "mat": "dynamicHeight"
+    "pr": "https://github.com/angular/material2/pull/10161",
+    "changes": [
+      {
+        "replace": "origin",
+        "replaceWith": "cdkConnectedOverlayOrigin",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "positions",
+        "replaceWith": "cdkConnectedOverlayPositions",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "offsetX",
+        "replaceWith": "cdkConnectedOverlayOffsetX",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "offsetY",
+        "replaceWith": "cdkConnectedOverlayOffsetY",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "width",
+        "replaceWith": "cdkConnectedOverlayWidth",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "height",
+        "replaceWith": "cdkConnectedOverlayHeight",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "minWidth",
+        "replaceWith": "cdkConnectedOverlayMinWidth",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "minHeight",
+        "replaceWith": "cdkConnectedOverlayMinHeight",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "backdropClass",
+        "replaceWith": "cdkConnectedOverlayBackdropClass",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "scrollStrategy",
+        "replaceWith": "cdkConnectedOverlayScrollStrategy",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "open",
+        "replaceWith": "cdkConnectedOverlayOpen",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      },
+      {
+        "replace": "hasBackdrop",
+        "replaceWith": "cdkConnectedOverlayHasBackdrop",
+        "whitelist": {
+          "attributes": ["cdk-connected-overlay", "connected-overlay", "cdkConnectedOverlay"]
+        }
+      }
+    ]
   },
+
+
   {
-    "md": "mdChipInputAddOnBlur",
-    "mat": "matChipInputAddOnBlur"
+    "pr": "https://github.com/angular/material2/pull/10218",
+    "changes": [
+      {
+        "replace": "align",
+        "replaceWith": "labelPosition",
+        "whitelist": {
+          "elements": ["mat-radio-group", "mat-radio-button"]
+        }
+      }
+    ]
   },
+
+
   {
-    "md": "mdChipInputSeparatorKeyCodes",
-    "mat": "matChipInputSeparatorKeyCodes"
+    "pr": "https://github.com/angular/material2/pull/10279",
+    "changes": [
+      {
+        "replace": "align",
+        "replaceWith": "position",
+        "whitelist": {
+          "elements": ["mat-drawer", "mat-sidenav"]
+        }
+      }
+    ]
   },
+
+
   {
-    "md": "mdDatepickerFilter",
-    "mat": "matDatepickerFilter"
+    "pr": "https://github.com/angular/material2/pull/10294",
+    "changes": [
+      {
+        "replace": "dividerColor",
+        "replaceWith": "color",
+        "whitelist": {
+          "elements": ["mat-form-field"]
+        }
+      },
+      {
+        "replace": "floatPlaceholder",
+        "replaceWith": "floatLabel",
+        "whitelist": {
+          "elements": ["mat-form-field"]
+        }
+      }
+    ]
   },
+
+
   {
-    "md": "mdRippleCentered",
-    "mat": "matRippleCentered"
+    "pr": "https://github.com/angular/material2/pull/10309",
+    "changes": [
+      {
+        "replace": "mat-dynamic-height",
+        "replaceWith": "dynamicHeight",
+        "whitelist": {
+          "elements": ["mat-tab-group"]
+        }
+      }
+    ]
   },
+
+
   {
-    "md": "mdRippleColor",
-    "mat": "matRippleColor"
+    "pr": "https://github.com/angular/material2/pull/10342",
+    "changes": [
+      {
+        "replace": "align",
+        "replaceWith": "labelPosition",
+        "whitelist": {
+          "elements": ["mat-checkbox"]
+        }
+      }
+    ]
   },
+
+
   {
-    "md": "mdRippleDisabled",
-    "mat": "matRippleDisabled"
+    "pr": "https://github.com/angular/material2/pull/10344",
+    "changes": [
+      {
+        "replace": "tooltip-position",
+        "replaceWith": "matTooltipPosition",
+        "whitelist": {
+          "attributes": ["matTooltip"]
+        }
+      }
+    ]
   },
+
+
   {
-    "md": "mdRippleRadius",
-    "mat": "matRippleRadius"
-  },
-  {
-    "md": "mdRippleSpeedFactor",
-    "mat": "matRippleSpeedFactor"
-  },
-  {
-    "md": "mdRippleTrigger",
-    "mat": "matRippleTrigger"
-  },
-  {
-    "md": "mdRippleUnbounded",
-    "mat": "matRippleUnbounded"
-  },
-  {
-    "md": "mdSortActive",
-    "mat": "matSortActive"
-  },
-  {
-    "md": "mdSortDirection",
-    "mat": "matSortDirection"
-  },
-  {
-    "md": "mdSortDisableClear",
-    "mat": "matSortDisableClear"
-  },
-  {
-    "md": "mdSortStart",
-    "mat": "matSortStart"
-  },
-  {
-    "md": "mdAutosizeMinRows",
-    "mat": "matAutosizeMinRows"
-  },
-  {
-    "md": "mdAutosizeMaxRows",
-    "mat": "matAutosizeMaxRows"
-  },
-  {
-    "md": "mdTooltipClass",
-    "mat": "matTooltipClass"
-  },
-  {
-    "md": "mdTooltipDisabled",
-    "mat": "matTooltipDisabled"
-  },
-  {
-    "md": "mdTooltipHideDelay",
-    "mat": "matTooltipHideDelay"
-  },
-  {
-    "md": "mdTooltipPosition",
-    "mat": "matTooltipPosition"
-  },
-  {
-    "md": "mdTooltipShowDelay",
-    "mat": "matTooltipShowDelay"
-  },
-  {
-    "md": "mdSortChange",
-    "mat": "matSortChange"
+    "pr": "https://github.com/angular/material2/pull/10373",
+    "changes": [
+      {
+        "replace": "thumb-label",
+        "replaceWith": "thumbLabel",
+        "whitelist": {
+          "elements": ["mat-slider"]
+        }
+      },
+      {
+        "replace": "tick-interval",
+        "replaceWith": "tickInterval",
+        "whitelist": {
+          "elements": ["mat-slider"]
+        }
+      }
+    ]
   }
 ]

@@ -2,7 +2,10 @@ import {Rules, RuleFailure, IOptions} from 'tslint';
 import * as ts from 'typescript';
 import {ComponentWalker} from '../tslint/component-walker';
 import {ExternalResource} from '../tslint/component-file';
-import {attributeSelectors, elementSelectors, inputNames} from '../material/component-data';
+import {
+  attributeSelectors, cssNames, elementSelectors, inputNames,
+  outputNames
+} from '../material/component-data';
 import {replaceAll} from '../typescript/literal';
 import {sync as globSync} from 'glob';
 
@@ -14,9 +17,9 @@ export const EXTRA_STYLESHEETS_GLOB_KEY = 'MD_EXTRA_STYLESHEETS_GLOB';
 
 /**
  * Message that is being sent to TSLint if there is something in the stylesheet that still use an
- * outdated prefix.
+ * outdated name.
  */
-const failureMessage = 'Stylesheet uses outdated Material prefix.';
+const failureMessage = 'Stylesheet uses outdated Material name.';
 
 /**
  * Rule that walks through every component decorator and updates their inline or external
@@ -45,7 +48,7 @@ export class SwitchStylesheetsWalker extends ComponentWalker {
   }
 
   visitInlineStylesheet(stylesheet: ts.StringLiteral) {
-    const newStylesheetText = this.replacePrefixesInStylesheet(stylesheet.getText());
+    const newStylesheetText = this.replaceNamesInStylesheet(stylesheet.getText());
 
     if (newStylesheetText !== stylesheet.getText()) {
       const replacement = this.createReplacement(stylesheet.getStart(), stylesheet.getWidth(),
@@ -56,7 +59,7 @@ export class SwitchStylesheetsWalker extends ComponentWalker {
   }
 
   visitExternalStylesheet(stylesheet: ExternalResource) {
-    const newStylesheetText = this.replacePrefixesInStylesheet(stylesheet.getFullText());
+    const newStylesheetText = this.replaceNamesInStylesheet(stylesheet.getFullText());
 
     if (newStylesheetText !== stylesheet.getFullText()) {
       const replacement = this.createReplacement(stylesheet.getStart(), stylesheet.getWidth(),
@@ -67,19 +70,32 @@ export class SwitchStylesheetsWalker extends ComponentWalker {
   }
 
   /**
-   * Replaces the outdated prefix in the stylesheet with the new one and returns an updated
+   * Replaces the outdated name in the stylesheet with the new one and returns an updated
    * stylesheet.
    */
-  private replacePrefixesInStylesheet(stylesheetContent: string): string {
-    [...elementSelectors, ...attributeSelectors].forEach(selector => {
-      stylesheetContent = replaceAll(stylesheetContent, selector.md, selector.mat);
+  private replaceNamesInStylesheet(stylesheetContent: string): string {
+    elementSelectors.forEach(selector => {
+      stylesheetContent = replaceAll(stylesheetContent, selector.replace, selector.replaceWith);
     });
 
-    inputNames.forEach(input => {
-      stylesheetContent = replaceAll(stylesheetContent, `[${input.md}]`, `[${input.mat}]`);
+    attributeSelectors.forEach(selector => {
+      stylesheetContent =
+          replaceAll(stylesheetContent, `[${selector.replace}]`, `[${selector.replaceWith}]`);
+    });
+
+    cssNames.forEach(name => {
+      if (!name.whitelist || name.whitelist.css) {
+        stylesheetContent = replaceAll(stylesheetContent, name.replace, name.replaceWith);
+      }
+    });
+
+    [...inputNames, ...outputNames].forEach(name => {
+      if (!name.whitelist || name.whitelist.css) {
+        stylesheetContent =
+            replaceAll(stylesheetContent, `[${name.replace}]`, `[${name.replaceWith}]`);
+      }
     });
 
     return stylesheetContent;
   }
-
 }

@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc -p ./ && npm run copy-files && cp package.json ./dist && cp README.md ./dist",
     "copy-files": "cpy \"**/*.json\" ../dist --parents --cwd ./src/ && cpy package.json dist/",
-    "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v --es test/fixtures/**/*.css"
+    "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v --es test/fixtures/**/*.{css,scss}"
   },
   "bin": {
     "mat-switcher": "./cli.js"
@@ -29,10 +29,10 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "@angular/cdk": "github:angular/cdk-builds",
+    "@angular/cdk": "5.0.0",
     "@angular/common": "^4.3.3",
     "@angular/core": "^4.3.3",
-    "@angular/material": "github:angular/material2-builds",
+    "@angular/material": "5.0.0",
     "@angular/platform-browser": "^4.3.3",
     "@types/chalk": "^0.4.31",
     "@types/glob": "^5.0.32",
