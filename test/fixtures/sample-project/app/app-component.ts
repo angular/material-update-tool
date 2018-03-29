@@ -42,7 +42,7 @@ export class TestComponent {
     let stuff = this.snav.onAlignChanged;
     cods[0]._deprecatedHeight = 1;
     let x = MAT_PLACEHOLDER_GLOBAL_OPTIONS;
-    let y = el.nativeElement.querySelector('mat-form-field');
+    let y = el.nativeElement.querySelector('mat-input-container');
 
     // These lines should not be changed:
     this.thing._deprecatedBackdropClass = 'test';
