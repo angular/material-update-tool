@@ -1,12 +1,12 @@
 /**
  * TSLint custom walker implementation that also visits external and inline templates.
  */
-import {Fix, RuleFailure, RuleWalker} from 'tslint';
-import {getLiteralTextWithoutQuotes} from '../typescript/literal';
-import {join, dirname} from 'path';
-import {createComponentFile, ExternalResource} from "./component-file";
-import {readFileSync, existsSync} from 'fs'
+import {existsSync, readFileSync} from 'fs'
+import {dirname, join, resolve} from 'path';
+import {Fix, IOptions, RuleFailure, RuleWalker} from 'tslint';
 import * as ts from 'typescript';
+import {getLiteralTextWithoutQuotes} from '../typescript/literal';
+import {createComponentFile, ExternalResource} from "./component-file";
 
 /**
  * Custom TSLint rule walker that identifies Angular components and visits specific parts of
@@ -19,6 +19,13 @@ export class ComponentWalker extends RuleWalker {
 
   protected visitExternalTemplate(template: ExternalResource) {}
   protected visitExternalStylesheet(stylesheet: ExternalResource) {}
+
+  private skipFiles: Set<string>;
+
+  constructor(sourceFile: ts.SourceFile, options: IOptions, skipFiles: string[] = []) {
+    super(sourceFile, options);
+    this.skipFiles = new Set(skipFiles.map(p => resolve(p)));
+  }
 
   visitNode(node: ts.Node) {
     if (node.kind === ts.SyntaxKind.CallExpression) {
@@ -71,15 +78,21 @@ export class ComponentWalker extends RuleWalker {
   private _visitExternalStylesArrayLiteral(styleUrls: ts.ArrayLiteralExpression) {
     styleUrls.elements.forEach(styleUrlLiteral => {
       const styleUrl = getLiteralTextWithoutQuotes(styleUrlLiteral as ts.StringLiteral);
-      const stylePath = join(dirname(this.getSourceFile().fileName), styleUrl);
+      const stylePath = resolve(join(dirname(this.getSourceFile().fileName), styleUrl));
 
-      this._reportExternalStyle(stylePath);
+      if (!this.skipFiles.has(stylePath)) {
+        this._reportExternalStyle(stylePath);
+      }
     })
   }
 
   private _reportExternalTemplate(templateUrlLiteral: ts.StringLiteral) {
     const templateUrl = getLiteralTextWithoutQuotes(templateUrlLiteral);
-    const templatePath = join(dirname(this.getSourceFile().fileName), templateUrl);
+    const templatePath = resolve(join(dirname(this.getSourceFile().fileName), templateUrl));
+
+    if (this.skipFiles.has(templatePath)) {
+      return;
+    }
 
     // Check if the external template file exists before proceeding.
     if (!existsSync(templatePath)) {

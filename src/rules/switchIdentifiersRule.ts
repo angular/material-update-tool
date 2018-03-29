@@ -1,27 +1,24 @@
-import {Rules, RuleFailure, ProgramAwareRuleWalker} from 'tslint';
+import {green, red} from 'chalk';
 import {relative} from 'path';
+import {ProgramAwareRuleWalker, RuleFailure, Rules} from 'tslint';
+import * as ts from 'typescript';
+import {classNames} from '../material/component-data';
+import {
+  isMaterialExportDeclaration,
+  isMaterialImportDeclaration,
+} from '../material/typescript-specifiers';
 import {getOriginalSymbolFromNode} from '../typescript/identifiers';
 import {
   isExportSpecifierNode,
   isImportSpecifierNode,
   isNamespaceImportNode
 } from '../typescript/imports';
-import {
-  isMaterialImportDeclaration,
-  isMaterialExportDeclaration,
-} from '../material/typescript-specifiers';
-import {classNames} from '../material/component-data';
-import * as ts from 'typescript';
-
-/** Message that is being sent to TSLint if an identifier still uses the outdated prefix. */
-const failureMessage = 'Identifier can be switched from "Md" prefix to "Mat".';
 
 /**
  * Rule that walks through every identifier that is part of Angular Material and replaces the
- * outdated prefix with the new one.
+ * outdated name with the new one.
  */
 export class Rule extends Rules.TypedRule {
-
   applyWithProgram(sourceFile: ts.SourceFile, program: ts.Program): RuleFailure[] {
     return this.applyWithWalker(
         new SwitchIdentifiersWalker(sourceFile, this.getOptions(), program));
@@ -44,7 +41,7 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
 
     // For identifiers that aren't listed in the className data, the whole check can be
     // skipped safely.
-    if (!classNames.some(data => data.md === identifier.text)) {
+    if (!classNames.some(data => data.replace === identifier.text)) {
       return;
     }
 
@@ -53,13 +50,13 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
     // If the symbol is not defined or could not be resolved, just skip the following identifier
     // checks.
     if (!symbol || !symbol.name || symbol.name === 'unknown') {
-      console.error(`Could not resolve symbol for identifier "${identifier.text}" ` + 
+      console.error(`Could not resolve symbol for identifier "${identifier.text}" ` +
           `in file ${this._getRelativeFileName()}`);
       return;
     }
 
     // For export declarations that are referring to Angular Material, the identifier should be
-    // switched to the new prefix.
+    // switched to the new name.
     if (isExportSpecifierNode(identifier) && isMaterialExportDeclaration(identifier)) {
       return this.createIdentifierFailure(identifier, symbol);
     }
@@ -83,18 +80,23 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
 
   /** Creates a failure and replacement for the specified identifier. */
   private createIdentifierFailure(identifier: ts.Identifier, symbol: ts.Symbol) {
-    const classData = classNames.find(data => data.md === symbol.name);
+    let classData = classNames.find(
+        data => data.replace === symbol.name || data.replace === identifier.text);
 
     if (!classData) {
-      console.error(`Could not find updated prefix for identifier "${identifier.getText()}" in ` + 
+      console.error(`Could not find updated name for identifier "${identifier.getText()}" in ` +
           ` in file ${this._getRelativeFileName()}.`);
       return;
     }
 
     const replacement = this.createReplacement(
-        identifier.getStart(), identifier.getWidth(), classData.mat);
+        identifier.getStart(), identifier.getWidth(), classData.replaceWith);
 
-    this.addFailureAtNode(identifier, failureMessage, replacement);
+    this.addFailureAtNode(
+        identifier,
+        `Found deprecated identifier "${red(classData.replace)}" which has been renamed to` +
+        ` "${green(classData.replaceWith)}"`,
+        replacement);
   }
 
   /** Checks namespace imports from Angular Material and stores them in a list. */
