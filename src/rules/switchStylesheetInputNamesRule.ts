@@ -1,4 +1,6 @@
+import {green, red} from 'chalk';
 import {sync as globSync} from 'glob';
+import {resolve} from "path";
 import {IOptions, Replacement, RuleFailure, Rules} from 'tslint';
 import * as ts from 'typescript';
 import {inputNames} from '../material/component-data';
@@ -35,7 +37,7 @@ export class SwitchStylesheetInputNamesWalker extends ComponentWalker {
       process.env[EXTRA_STYLESHEETS_GLOB_KEY].split(' ')
           .map(glob => globSync(glob))
           .forEach(files => files.forEach(styleUrl => {
-            extraFiles.push(styleUrl);
+            extraFiles.push(resolve(styleUrl));
           }));
     }
 
@@ -75,7 +77,11 @@ export class SwitchStylesheetInputNamesWalker extends ComponentWalker {
         const bracketedName = {replace: `[${name.replace}]`, replaceWith: `[${name.replaceWith}]`};
         this.createReplacementsForOffsets(node, name,
             findAll(stylesheetContent, bracketedName.replace)).forEach(replacement => {
-              replacements.push({message: failureMessage, replacement});
+              replacements.push({
+                message: `Found deprecated @Input() "${red(name.replace)}" which has been renamed` +
+                    ` to "${green(name.replaceWith)}"`,
+                replacement
+              });
             });
       }
     });

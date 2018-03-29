@@ -1,3 +1,4 @@
+import {green, red} from 'chalk';
 import {Replacement, RuleFailure, Rules, RuleWalker} from 'tslint';
 import * as ts from 'typescript';
 import {cssNames} from '../material/component-data';
@@ -29,7 +30,11 @@ export class SwitchStringLiteralCssNamesWalker extends RuleWalker {
       if (!name.whitelist || name.whitelist.strings) {
         this.createReplacementsForOffsets(stringLiteral, name,
             findAll(stringLiteralText, name.replace)).forEach(replacement => {
-          this.addFailureAtNode(stringLiteral, failureMessage, replacement)
+          this.addFailureAtNode(
+              stringLiteral,
+              `Found deprecated CSS class "${red(name.replace)}" which has been renamed to` +
+              ` "${green(name.replaceWith)}"`,
+              replacement)
         });
       }
     });

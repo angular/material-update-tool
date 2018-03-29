@@ -53,7 +53,7 @@ export class SwitchTemplatesWalker extends ComponentWalker {
   private replaceNamesInTemplate(node: ts.Node, templateContent: string):
       {message: string, replacement: Replacement}[] {
     const replacements: {message: string, replacement: Replacement}[] = [];
-/*
+
     elementSelectors.forEach(selector => {
       // Being more aggressive with that replacement here allows us to also handle inline
       // style elements. Normally we would check if the selector is surrounded by the HTML tag
@@ -125,7 +125,7 @@ export class SwitchTemplatesWalker extends ComponentWalker {
             replacements.push({message: failureMessage, replacement});
           })
     });
-*/
+
     return replacements;
   }
 

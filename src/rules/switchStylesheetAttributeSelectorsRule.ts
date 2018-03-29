@@ -1,4 +1,6 @@
+import {green, red} from 'chalk';
 import {sync as globSync} from 'glob';
+import {resolve} from 'path';
 import {IOptions, Replacement, RuleFailure, Rules} from 'tslint';
 import * as ts from 'typescript';
 import {attributeSelectors} from '../material/component-data';
@@ -35,7 +37,7 @@ export class SwitchStylesheetAtributeSelectorsWalker extends ComponentWalker {
       process.env[EXTRA_STYLESHEETS_GLOB_KEY].split(' ')
           .map(glob => globSync(glob))
           .forEach(files => files.forEach(styleUrl => {
-            extraFiles.push(styleUrl);
+            extraFiles.push(resolve(styleUrl));
           }));
     }
 
@@ -77,7 +79,11 @@ export class SwitchStylesheetAtributeSelectorsWalker extends ComponentWalker {
       };
       this.createReplacementsForOffsets(node, bracketedSelector,
           findAll(stylesheetContent, bracketedSelector.replace)).forEach(replacement => {
-        replacements.push({message: failureMessage, replacement});
+        replacements.push({
+          message: `Found deprecated attribute selector "${red(bracketedSelector.replace)}"` +
+              ` which has been renamed to "${green(bracketedSelector.replaceWith)}"`,
+          replacement
+        });
       });
     });
 

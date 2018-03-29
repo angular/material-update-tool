@@ -1,5 +1,6 @@
+import {green, red} from 'chalk';
 import {sync as globSync} from 'glob';
-import {relative} from 'path';
+import {resolve} from 'path';
 import {IOptions, Replacement, RuleFailure, Rules} from 'tslint';
 import * as ts from 'typescript';
 import {cssNames} from '../material/component-data';
@@ -35,7 +36,7 @@ export class SwitchStylesheetCssNamesWalker extends ComponentWalker {
       process.env[EXTRA_STYLESHEETS_GLOB_KEY].split(' ')
           .map(glob => globSync(glob))
           .forEach(files => files.forEach(styleUrl => {
-            extraFiles.push(styleUrl);
+            extraFiles.push(resolve(styleUrl));
           }));
     }
 
@@ -74,7 +75,11 @@ export class SwitchStylesheetCssNamesWalker extends ComponentWalker {
       if (!name.whitelist || name.whitelist.css) {
         this.createReplacementsForOffsets(node, name, findAll(stylesheetContent, name.replace))
             .forEach(replacement => {
-              replacements.push({message: failureMessage, replacement});
+              replacements.push({
+                message: `Found CSS class "${red(name.replace)}" which has been renamed to` +
+                    ` "${green(name.replaceWith)}"`,
+                replacement
+              });
             });
       }
     });

@@ -1,3 +1,4 @@
+import {green, red} from 'chalk';
 import {Replacement, RuleFailure, Rules, RuleWalker} from 'tslint';
 import * as ts from 'typescript';
 import {elementSelectors} from '../material/component-data';
@@ -28,7 +29,11 @@ export class SwitchStringLiteralElementSelectorsWalker extends RuleWalker {
     elementSelectors.forEach(selector => {
       this.createReplacementsForOffsets(stringLiteral, selector,
           findAll(stringLiteralText, selector.replace)).forEach(replacement => {
-        this.addFailureAtNode(stringLiteral, failureMessage, replacement);
+        this.addFailureAtNode(
+            stringLiteral,
+            `Found deprecated element selector "${red(selector.replace)}" which has been` +
+            ` renamed to "${green(selector.replaceWith)}"`,
+            replacement);
       });
     });
   }
