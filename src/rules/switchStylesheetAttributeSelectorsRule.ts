@@ -27,27 +27,38 @@ export class Rule extends Rules.AbstractRule {
 export class SwitchStylesheetAtributeSelectorsWalker extends ComponentWalker {
 
   constructor(sourceFile: ts.SourceFile, options: IOptions) {
-    super(sourceFile, options);
-
     // This is a special feature. In some applications, developers will have global stylesheets
     // that are not specified in any Angular component. Those stylesheets can be also migrated
     // if the developer specifies the `--extra-stylesheets` option which accepts a glob for files.
+    const extraFiles = [];
     if (process.env[EXTRA_STYLESHEETS_GLOB_KEY]) {
       process.env[EXTRA_STYLESHEETS_GLOB_KEY].split(' ')
-        .map(glob => globSync(glob))
-        .forEach(files => files.forEach(styleUrl => this._reportExternalStyle(styleUrl)));
+          .map(glob => globSync(glob))
+          .forEach(files => files.forEach(styleUrl => {
+            extraFiles.push(styleUrl);
+          }));
     }
+
+    super(sourceFile, options, extraFiles);
+
+    extraFiles.forEach(styleUrl => this._reportExternalStyle(styleUrl));
   }
 
   visitInlineStylesheet(stylesheet: ts.StringLiteral) {
     this.replaceNamesInStylesheet(stylesheet, stylesheet.getText()).forEach(replacement => {
-      this.addFailureAtNode(stylesheet, replacement.message, replacement.replacement);
+      const fix = replacement.replacement;
+      const ruleFailure = new RuleFailure(stylesheet.getSourceFile(), fix.start, fix.end,
+          replacement.message, this.getRuleName(), fix);
+      this.addFailure(ruleFailure);
     });
   }
 
   visitExternalStylesheet(stylesheet: ExternalResource) {
     this.replaceNamesInStylesheet(stylesheet, stylesheet.getFullText()).forEach(replacement => {
-      this.addExternalResourceFailure(stylesheet, replacement.message, replacement.replacement);
+      const fix = replacement.replacement;
+      const ruleFailure = new RuleFailure(stylesheet, fix.start + 1, fix.end + 1,
+          replacement.message, this.getRuleName(), fix);
+      this.addFailure(ruleFailure);
     });
   }
 

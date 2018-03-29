@@ -25,6 +25,8 @@ export class AppComponent {}
       button[mat-button] {
         text-transform: none;
       }
+        
+      mat-input-container {}
     `
   ]
 })
