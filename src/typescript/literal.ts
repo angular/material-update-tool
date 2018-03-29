@@ -52,7 +52,6 @@ function findAllIoInElWithTag(html:string, name: string, tagNames: string[], sta
       ${name}
       ${endIoPattern}[=\s>]`;
   const replaceIoRegex = new RegExp(replaceIoPattern.replace(/\s/g, ''), 'g');
-  //return html.replace(replaceIoRegex, (_, prefix, suffix) => `${prefix}${newName}${suffix}`);
   const result = [];
   let match;
   while (match = replaceIoRegex.exec(html)) {
@@ -76,8 +75,6 @@ function findAllIoInElWithAttr(html: string, name: string, attrs: string[], star
     ${endIoPattern}[=\s](?:${skipPattern})?${attrsPattern}[=\s>]`;
   const replaceIoPattern = String.raw`${inputAfterAttrPattern}|${inputBeforeAttrPattern}`;
   const replaceIoRegex = new RegExp(replaceIoPattern.replace(/\s/g, ''), 'g');
-  //return html.replace(replaceIoRegex, (_, prefix1, suffix1, prefix2, suffix2) =>
-  //    `${prefix1 || prefix2}${newName}${suffix1 || suffix2}`);
   const result = [];
   let match;
   while (match = replaceIoRegex.exec(html)) {

@@ -47,17 +47,17 @@ export class SwitchTemplateOutputNamesWalker extends ComponentWalker {
     const replacements: {message: string, replacement: Replacement}[] = [];
 
     outputNames.forEach(name => {
-      let offsets;
+      let offsets = [];
       if (name.whitelist && name.whitelist.attributes && name.whitelist.attributes.length) {
-        offsets = findAllOutputsInElWithAttr(
-            templateContent, name.replace, name.whitelist.attributes);
+        offsets = offsets.concat(findAllOutputsInElWithAttr(
+            templateContent, name.replace, name.whitelist.attributes));
       }
       if (name.whitelist && name.whitelist.elements && name.whitelist.elements.length) {
-        offsets = findAllOutputsInElWithTag(
-            templateContent, name.replace, name.whitelist.elements);
+        offsets = offsets.concat(findAllOutputsInElWithTag(
+            templateContent, name.replace, name.whitelist.elements));
       }
       if (!name.whitelist) {
-        offsets = findAll(templateContent, name.replace);
+        offsets = offsets.concat(findAll(templateContent, name.replace));
       }
       this.createReplacementsForOffsets(node, name, offsets).forEach(replacement => {
         replacements.push({
