@@ -1,6 +1,6 @@
 import {Replacement, RuleFailure, Rules, RuleWalker} from 'tslint';
 import * as ts from 'typescript';
-import {elementSelectors} from "../material/component-data";
+import {elementSelectors} from '../material/component-data';
 import {findAll} from '../typescript/literal';
 
 /** Message that is being sent to TSLint if a string literal still uses the outdated name. */
@@ -12,7 +12,8 @@ const failureMessage = 'Deprecated string literal value can be updated.';
  */
 export class Rule extends Rules.AbstractRule {
   apply(sourceFile: ts.SourceFile): RuleFailure[] {
-    return this.applyWithWalker(new SwitchStringLiteralElementSelectorsWalker(sourceFile, this.getOptions()));
+    return this.applyWithWalker(
+        new SwitchStringLiteralElementSelectorsWalker(sourceFile, this.getOptions()));
   }
 }
 
@@ -32,7 +33,8 @@ export class SwitchStringLiteralElementSelectorsWalker extends RuleWalker {
     });
   }
 
-  private createReplacementsForOffsets(node: ts.Node, update: {replace: string, replaceWith: string},
+  private createReplacementsForOffsets(node: ts.Node,
+                                       update: {replace: string, replaceWith: string},
                                        offsets: number[]): Replacement[] {
     return offsets.map(offset => this.createReplacement(
         node.getStart() + offset, update.replace.length, update.replaceWith));

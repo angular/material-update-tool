@@ -1,22 +1,11 @@
 import {sync as globSync} from 'glob';
 import {IOptions, Replacement, RuleFailure, Rules} from 'tslint';
 import * as ts from 'typescript';
-import {
-  attributeSelectors,
-  cssNames,
-  elementSelectors,
-  inputNames,
-  outputNames
-} from '../material/component-data';
+import {outputNames} from '../material/component-data';
+import {EXTRA_STYLESHEETS_GLOB_KEY} from '../material/extra-stylsheets';
 import {ExternalResource} from '../tslint/component-file';
 import {ComponentWalker} from '../tslint/component-walker';
 import {findAll} from '../typescript/literal';
-
-/**
- * A glob string needs to be transferred from the CLI process to the child process of TSLint.
- * This is the environment variable, which will be set if the `--extra-stylesheets` option is set.
- */
-export const EXTRA_STYLESHEETS_GLOB_KEY = 'MD_EXTRA_STYLESHEETS_GLOB';
 
 /**
  * Message that is being sent to TSLint if there is something in the stylesheet that still use an
@@ -30,11 +19,12 @@ const failureMessage = 'Stylesheet uses outdated Material name.';
  */
 export class Rule extends Rules.AbstractRule {
   apply(sourceFile: ts.SourceFile): RuleFailure[] {
-    return this.applyWithWalker(new SwitchStylesheetsWalker(sourceFile, this.getOptions()));
+    return this.applyWithWalker(
+        new SwitchStylesheetOutputNamesWalker(sourceFile, this.getOptions()));
   }
 }
 
-export class SwitchStylesheetsWalker extends ComponentWalker {
+export class SwitchStylesheetOutputNamesWalker extends ComponentWalker {
 
   constructor(sourceFile: ts.SourceFile, options: IOptions) {
     super(sourceFile, options);
@@ -68,43 +58,6 @@ export class SwitchStylesheetsWalker extends ComponentWalker {
   private replaceNamesInStylesheet(node: ts.Node, stylesheetContent: string):
       {message: string, replacement: Replacement}[] {
     const replacements: {message: string, replacement: Replacement}[] = [];
-
-    elementSelectors.forEach(selector => {
-      this.createReplacementsForOffsets(node, selector,
-          findAll(stylesheetContent, selector.replace)).forEach(replacement => {
-            replacements.push({message: failureMessage, replacement});
-          });
-    });
-
-    attributeSelectors.forEach(selector => {
-      const bracketedSelector = {
-        replace: `[${selector.replace}]`,
-        replaceWith: `[${selector.replaceWith}]`
-      };
-      this.createReplacementsForOffsets(node, bracketedSelector,
-          findAll(stylesheetContent, bracketedSelector.replace)).forEach(replacement => {
-        replacements.push({message: failureMessage, replacement});
-      });
-    });
-
-    cssNames.forEach(name => {
-      if (!name.whitelist || name.whitelist.css) {
-        this.createReplacementsForOffsets(node, name, findAll(stylesheetContent, name.replace))
-            .forEach(replacement => {
-              replacements.push({message: failureMessage, replacement});
-            });
-      }
-    });
-
-    inputNames.forEach(name => {
-      if (!name.whitelist || name.whitelist.css) {
-        const bracketedName = {replace: `[${name.replace}]`, replaceWith: `[${name.replaceWith}]`};
-        this.createReplacementsForOffsets(node, name,
-            findAll(stylesheetContent, bracketedName.replace)).forEach(replacement => {
-              replacements.push({message: failureMessage, replacement});
-            });
-      }
-    });
 
     outputNames.forEach(name => {
       if (!name.whitelist || name.whitelist.css) {

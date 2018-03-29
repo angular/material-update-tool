@@ -2,12 +2,15 @@
   "rulesDirectory": ["./"],
   "rules": {
     "switch-identifiers": true,
-    "switch-string-literals": true,
+    "switch-property-names": true,
     "switch-string-literal-attribute-selectors": true,
     "switch-string-literal-css-names": true,
     "switch-string-literal-element-selectors": true,
-    "switch-templates": true,
-    "switch-stylesheets": true,
-    "switch-property-names": true
+    "switch-stylesheet-attribute-selectors": true,
+    "switch-stylesheet-css-names": true,
+    "switch-stylesheet-element-selectors": true,
+    "switch-stylesheet-input-names": true,
+    "switch-stylesheet-output-names": true,
+    "switch-templates": true
   }
 }

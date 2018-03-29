@@ -1,13 +1,13 @@
 #! /usr/bin/env node
 
-import {option, help, argv} from 'yargs';
 import {red, yellow} from 'chalk';
-import {statSync, existsSync} from 'fs';
-import {resolve} from 'path';
 import {spawn} from 'child_process';
-import {EXTRA_STYLESHEETS_GLOB_KEY} from './rules/switchStylesheetsRule';
-import {findTslintBinaryPath} from './tslint/find-tslint-binary';
+import {existsSync, statSync} from 'fs';
 import * as ora from 'ora';
+import {resolve} from 'path';
+import {argv, help, option} from 'yargs';
+import {EXTRA_STYLESHEETS_GLOB_KEY} from './material/extra-stylsheets';
+import {findTslintBinaryPath} from './tslint/find-tslint-binary';
 
 // Register a help page in yargs.
 help();
