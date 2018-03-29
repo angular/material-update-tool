@@ -67,30 +67,28 @@ function migrateProject(tslintArgs: string[], env?: any) {
   // Run the TSLint CLI with the configuration file from the migration tool.
   const tslintProcess = spawn('node', [tslintBin, ...tslintArgs], {env});
 
-  let stdout = '';
   let stderr = '';
 
-  tslintProcess.stdout.on('data', data => stdout += data.toString());
   tslintProcess.stderr.on('data', data => stderr += data.toString());
 
-  tslintProcess.on('close', status => {
+  tslintProcess.stdout.pipe(process.stdout);
+  tslintProcess.stderr.pipe(process.stderr);
+
+  tslintProcess.on('close', () => {
     // Clear the spinner output before printing messages, because Ora is not able to clear the
     // spinner properly if there is console output after the previous spinner output.
     spinner.clear();
 
-    if (status !== 0 || stderr.trim()) {
-      console.error(`\n${stderr.trim()}\n`);
+    if (stderr.trim()) {
       console.error(yellow('Make sure the following things are done correctly:'));
       console.error(yellow(' • Angular Material is installed in the project (for type checking)'));
-      console.error(yellow(' • The Angular Material version is not higher than "beta.11"'))      
+      console.error(yellow(' • The Angular Material version is not higher than "5.2.4"'));
       console.error(yellow(' • Project "tsconfig.json" configuration matches the desired files'));
       console.error();
       spinner.fail('Errors occurred while migrating the Angular Material project.');
     } else {
-      if (stdout.trim()) {
-        console.info(`\n${stdout.trim()}\n`);
-      }
-      spinner.succeed('Successfully updated the project source files.')
+      spinner.succeed(`Successfully migrated the project source files. Please check above output ` +
+          `for issues that couldn't be automatically fixed.`);
     }
   });
 }

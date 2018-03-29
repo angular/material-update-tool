@@ -1,9 +1,7 @@
+import {green, red} from 'chalk';
 import {ProgramAwareRuleWalker, RuleFailure, Rules} from 'tslint';
 import * as ts from 'typescript';
 import {propertyNames} from '../material/component-data';
-
-/** Message that is being sent to TSLint if a property name still uses the outdated name. */
-const failureMessage = 'Deprecated property access expression can be updated.';
 
 /**
  * Rule that walks through every property access expression and updates properties that have
@@ -47,6 +45,12 @@ export class SwitchPropertyNamesWalker extends ProgramAwareRuleWalker {
     const replacement = this.createReplacement(prop.name.getStart(),
         prop.name.getWidth(), propertyData.replaceWith);
 
-    this.addFailureAtNode(prop.name, failureMessage, replacement);
+    const typeMessage = propertyData.whitelist ? `of class "${typeName}"` : '';
+
+    this.addFailureAtNode(
+        prop.name,
+        `Found deprecated property "${red(propertyData.replace)}" ${typeMessage} which has been` +
+        ` renamed to "${green(propertyData.replaceWith)}"`,
+        replacement);
   }
 }

@@ -1,7 +1,8 @@
-import {RuleFailure, Rules} from 'tslint';
+import {Replacement, RuleFailure, Rules} from 'tslint';
 import * as ts from 'typescript';
 import {
-  attributeSelectors, cssNames,
+  attributeSelectors,
+  cssNames,
   elementSelectors,
   exportAsNames,
   inputNames,
@@ -10,11 +11,11 @@ import {
 import {ExternalResource} from '../tslint/component-file';
 import {ComponentWalker} from '../tslint/component-walker';
 import {
-  replaceAll,
-  replaceAllInputsInElWithAttr,
-  replaceAllInputsInElWithTag,
-  replaceAllOutputsInElWithAttr,
-  replaceAllOutputsInElWithTag
+  findAll,
+  findAllInputsInElWithAttr,
+  findAllInputsInElWithTag,
+  findAllOutputsInElWithAttr,
+  findAllOutputsInElWithTag
 } from '../typescript/literal';
 
 /**
@@ -37,76 +38,103 @@ export class Rule extends Rules.AbstractRule {
 export class SwitchTemplatesWalker extends ComponentWalker {
 
   visitInlineTemplate(template: ts.StringLiteral) {
-    const newTemplateText = this.replaceNamesInTemplate(template.getText());
-
-    if (newTemplateText !== template.getText()) {
-      const replacement = this.createReplacement(template.getStart(), template.getWidth(),
-          newTemplateText);
-
-      this.addFailureAtNode(template, failureMessage, replacement);
-    }
+    this.replaceNamesInTemplate(template, template.getText()).forEach(replacement => {
+      this.addFailureAtNode(template, replacement.message, replacement.replacement);
+    });
   }
 
   visitExternalTemplate(template: ExternalResource) {
-    const newTemplateText = this.replaceNamesInTemplate(template.getFullText());
-
-    if (newTemplateText !== template.getFullText()) {
-      const replacement = this.createReplacement(template.getStart(), template.getWidth(),
-          newTemplateText);
-
-      this.addExternalResourceFailure(template, failureMessage, replacement);
-    }
+    this.replaceNamesInTemplate(template, template.getFullText()).forEach(replacement => {
+      this.addExternalResourceFailure(template, replacement.message, replacement.replacement);
+    });
   }
 
   /**
    * Replaces the outdated name in the template with the new one and returns an updated template.
    */
-  private replaceNamesInTemplate(templateContent: string): string {
-    [...elementSelectors, ...attributeSelectors].forEach(selector => {
+  private replaceNamesInTemplate(node: ts.Node, templateContent: string):
+      {message: string, replacement: Replacement}[] {
+    const replacements: {message: string, replacement: Replacement}[] = [];
+
+    elementSelectors.forEach(selector => {
       // Being more aggressive with that replacement here allows us to also handle inline
       // style elements. Normally we would check if the selector is surrounded by the HTML tag
       // characters.
-      templateContent = replaceAll(templateContent, selector.replace, selector.replaceWith);
+      this.createReplacementsForOffsets(node, selector, findAll(templateContent, selector.replace))
+          .forEach(replacement => {
+            replacements.push({message: failureMessage, replacement});
+          });
+    });
+
+    attributeSelectors.forEach(selector => {
+      // Being more aggressive with that replacement here allows us to also handle inline
+      // style elements. Normally we would check if the selector is surrounded by the HTML tag
+      // characters.
+      this.createReplacementsForOffsets(node, selector, findAll(templateContent, selector.replace))
+          .forEach(replacement => {
+            replacements.push({message: failureMessage, replacement});
+          });
     });
 
     cssNames.forEach(name => {
       if (!name.whitelist || name.whitelist.html) {
-        templateContent = replaceAll(templateContent, name.replace, name.replaceWith);
+        this.createReplacementsForOffsets(node, name, findAll(templateContent, name.replace))
+            .forEach(replacement => {
+              replacements.push({message: failureMessage, replacement});
+            });
       }
     });
 
-    inputNames.forEach(input => {
-      if (input.whitelist && input.whitelist.attributes && input.whitelist.attributes.length) {
-        templateContent = replaceAllInputsInElWithAttr(
-            templateContent, input.replace, input.replaceWith, input.whitelist.attributes);
+    inputNames.forEach(name => {
+      let offsets;
+      if (name.whitelist && name.whitelist.attributes && name.whitelist.attributes.length) {
+        offsets =
+            findAllInputsInElWithAttr(templateContent, name.replace, name.whitelist.attributes);
       }
-      if (input.whitelist && input.whitelist.elements && input.whitelist.elements.length) {
-        templateContent = replaceAllInputsInElWithTag(
-            templateContent, input.replace, input.replaceWith, input.whitelist.elements);
+      if (name.whitelist && name.whitelist.elements && name.whitelist.elements.length) {
+        offsets =
+            findAllInputsInElWithTag(templateContent, name.replace, name.whitelist.elements);
       }
-      if (!input.whitelist) {
-        templateContent = replaceAll(templateContent, input.replace, input.replaceWith);
+      if (!name.whitelist) {
+        offsets = findAll(templateContent, name.replace);
       }
+      this.createReplacementsForOffsets(node, name, offsets).forEach(replacement => {
+        replacements.push({message: failureMessage, replacement});
+      });
     });
 
-    outputNames.forEach(output => {
-      if (output.whitelist && output.whitelist.attributes && output.whitelist.attributes.length) {
-        templateContent = replaceAllOutputsInElWithAttr(
-            templateContent, output.replace, output.replaceWith, output.whitelist.attributes);
+    outputNames.forEach(name => {
+      let offsets;
+      if (name.whitelist && name.whitelist.attributes && name.whitelist.attributes.length) {
+        offsets = findAllOutputsInElWithAttr(
+            templateContent, name.replace, name.whitelist.attributes);
       }
-      if (output.whitelist && output.whitelist.elements && output.whitelist.elements.length) {
-        templateContent = replaceAllOutputsInElWithTag(
-            templateContent, output.replace, output.replaceWith, output.whitelist.elements);
+      if (name.whitelist && name.whitelist.elements && name.whitelist.elements.length) {
+        offsets = findAllOutputsInElWithTag(
+            templateContent, name.replace, name.whitelist.elements);
       }
-      if (!output.whitelist) {
-        templateContent = replaceAll(templateContent, output.replace, output.replaceWith);
+      if (!name.whitelist) {
+        offsets = findAll(templateContent, name.replace);
       }
+      this.createReplacementsForOffsets(node, name, offsets).forEach(replacement => {
+        replacements.push({message: failureMessage, replacement});
+      });
     });
 
     exportAsNames.forEach(selector => {
-      templateContent = replaceAll(templateContent, selector.replace, selector.replaceWith);
+      this.createReplacementsForOffsets(node, selector, findAll(templateContent, selector.replace))
+          .forEach(replacement => {
+            replacements.push({message: failureMessage, replacement});
+          })
     });
 
-    return templateContent;
+    return replacements;
+  }
+
+  private createReplacementsForOffsets(node: ts.Node,
+                                       update: {replace: string, replaceWith: string},
+                                       offsets: number[]): Replacement[] {
+    return offsets.map(offset => this.createReplacement(
+        node.getStart() + offset, update.replace.length, update.replaceWith));
   }
 }

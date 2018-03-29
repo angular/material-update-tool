@@ -6,22 +6,22 @@ export function getLiteralTextWithoutQuotes(literal: ts.StringLiteral) {
 }
 
 /** Method that can be used to replace all search occurrences in a string. */
-export function replaceAll(str: string, search: string, replacement: string) {
-  while (str.indexOf(search) !== -1) {
-    str = str.replace(search, replacement);
+export function findAll(str: string, search: string): number[] {
+  const result = [];
+  let i = -1;
+  while ((i = str.indexOf(search, i + 1)) !== -1) {
+    result.push(i);
   }
-  return str;
+  return result;
 }
 
-export function replaceAllInputsInElWithTag(html: string, oldName: string, newName: string,
-                                            tagNames: string[]) {
-  return replaceAllIoInElWithTag(
-      html, oldName, newName, tagNames, String.raw`\[?`, String.raw`\]?`);
+export function findAllInputsInElWithTag(html: string, name: string, tagNames: string[]): number[] {
+  return findAllIoInElWithTag(html, name, tagNames, String.raw`\[?`, String.raw`\]?`);
 }
 
-export function replaceAllOutputsInElWithTag(html: string, oldName: string, newName: string,
-                                             tagNames: string[]) {
-  return replaceAllIoInElWithTag(html, oldName, newName, tagNames, String.raw`\(`, String.raw`\)`);
+export function findAllOutputsInElWithTag(html: string, name: string, tagNames: string[]):
+    number[] {
+  return findAllIoInElWithTag(html, name, tagNames, String.raw`\(`, String.raw`\)`);
 }
 
 /**
@@ -29,9 +29,8 @@ export function replaceAllOutputsInElWithTag(html: string, oldName: string, newN
  * inside an element with any of the given attributes. This is useful for replacing an `@Input()` on
  * a `@Directive()` with an attribute selector.
  */
-export function replaceAllInputsInElWithAttr(html: string, oldName: string, newName: string,
-                                             attrs: string[]) {
-  return replaceAllIoInElWithAttr(html, oldName, newName, attrs, String.raw`\[?`, String.raw`\]?`);
+export function findAllInputsInElWithAttr(html: string, name: string, attrs: string[]): number[] {
+  return findAllIoInElWithAttr(html, name, attrs, String.raw`\[?`, String.raw`\]?`);
 }
 
 /**
@@ -39,39 +38,50 @@ export function replaceAllInputsInElWithAttr(html: string, oldName: string, newN
  * inside an element with any of the given attributes. This is useful for replacing an `@Output()`
  * on a `@Directive()` with an attribute selector.
  */
-export function replaceAllOutputsInElWithAttr(html: string, oldName: string, newName: string,
-                                              attrs: string[]) {
-  return replaceAllIoInElWithAttr(html, oldName, newName, attrs, String.raw`\(`, String.raw`\)`);
+export function findAllOutputsInElWithAttr(html: string, name: string, attrs: string[]): number[] {
+  return findAllIoInElWithAttr(html, name, attrs, String.raw`\(`, String.raw`\)`);
 }
 
-function replaceAllIoInElWithTag(html:string, oldName: string, newName: string, tagNames: string[],
-                                 startIoPattern: string, endIoPattern: string) {
+function findAllIoInElWithTag(html:string, name: string, tagNames: string[], startIoPattern: string,
+                              endIoPattern: string): number[] {
   const skipPattern = String.raw`[^>]*\s`;
   const openTagPattern = String.raw`<\s*`;
   const tagNamesPattern = String.raw`(?:${tagNames.join('|')})`;
   const replaceIoPattern = String.raw`
       (${openTagPattern}${tagNamesPattern}\s(?:${skipPattern})?${startIoPattern})
-      ${oldName}
-      (${endIoPattern}[=\s>])`;
+      ${name}
+      ${endIoPattern}[=\s>]`;
   const replaceIoRegex = new RegExp(replaceIoPattern.replace(/\s/g, ''), 'g');
-  return html.replace(replaceIoRegex, (_, prefix, suffix) => `${prefix}${newName}${suffix}`);
+  //return html.replace(replaceIoRegex, (_, prefix, suffix) => `${prefix}${newName}${suffix}`);
+  const result = [];
+  let match;
+  while (match = replaceIoRegex.exec(html)) {
+    result.push(match.index + match[1].length);
+  }
+  return result;
 }
 
-function replaceAllIoInElWithAttr(html: string, oldName: string, newName: string, attrs: string[],
-                                  startIoPattern: string, endIoPattern: string) {
+function findAllIoInElWithAttr(html: string, name: string, attrs: string[], startIoPattern: string,
+                               endIoPattern: string): number[] {
   const skipPattern = String.raw`[^>]*\s`;
   const openTagPattern = String.raw`<\s*\S`;
   const attrsPattern = String.raw`(?:${attrs.join('|')})`;
   const inputAfterAttrPattern = String.raw`
     (${openTagPattern}${skipPattern}${attrsPattern}[=\s](?:${skipPattern})?${startIoPattern})
-    ${oldName}
-    (${endIoPattern}[=\s>])`;
+    ${name}
+    ${endIoPattern}[=\s>]`;
   const inputBeforeAttrPattern = String.raw`
     (${openTagPattern}${skipPattern}${startIoPattern})
-    ${oldName}
-    (${endIoPattern}[=\s](?:${skipPattern})?${attrsPattern}[=\s>])`;
+    ${name}
+    ${endIoPattern}[=\s](?:${skipPattern})?${attrsPattern}[=\s>]`;
   const replaceIoPattern = String.raw`${inputAfterAttrPattern}|${inputBeforeAttrPattern}`;
   const replaceIoRegex = new RegExp(replaceIoPattern.replace(/\s/g, ''), 'g');
-  return html.replace(replaceIoRegex, (_, prefix1, suffix1, prefix2, suffix2) =>
-      `${prefix1 || prefix2}${newName}${suffix1 || suffix2}`);
+  //return html.replace(replaceIoRegex, (_, prefix1, suffix1, prefix2, suffix2) =>
+  //    `${prefix1 || prefix2}${newName}${suffix1 || suffix2}`);
+  const result = [];
+  let match;
+  while (match = replaceIoRegex.exec(html)) {
+    result.push(match.index + (match[1] || match[2]).length);
+  }
+  return result;
 }

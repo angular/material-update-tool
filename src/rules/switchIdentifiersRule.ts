@@ -1,27 +1,24 @@
-import {Rules, RuleFailure, ProgramAwareRuleWalker} from 'tslint';
+import {green, red} from 'chalk';
 import {relative} from 'path';
+import {ProgramAwareRuleWalker, RuleFailure, Rules} from 'tslint';
+import * as ts from 'typescript';
+import {classNames} from '../material/component-data';
+import {
+  isMaterialExportDeclaration,
+  isMaterialImportDeclaration,
+} from '../material/typescript-specifiers';
 import {getOriginalSymbolFromNode} from '../typescript/identifiers';
 import {
   isExportSpecifierNode,
   isImportSpecifierNode,
   isNamespaceImportNode
 } from '../typescript/imports';
-import {
-  isMaterialImportDeclaration,
-  isMaterialExportDeclaration,
-} from '../material/typescript-specifiers';
-import {classNames} from '../material/component-data';
-import * as ts from 'typescript';
-
-/** Message that is being sent to TSLint if an identifier still uses the outdated name. */
-const failureMessage = 'Deprecated identifier can be updated.';
 
 /**
  * Rule that walks through every identifier that is part of Angular Material and replaces the
  * outdated name with the new one.
  */
 export class Rule extends Rules.TypedRule {
-
   applyWithProgram(sourceFile: ts.SourceFile, program: ts.Program): RuleFailure[] {
     return this.applyWithWalker(
         new SwitchIdentifiersWalker(sourceFile, this.getOptions(), program));
@@ -53,7 +50,7 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
     // If the symbol is not defined or could not be resolved, just skip the following identifier
     // checks.
     if (!symbol || !symbol.name || symbol.name === 'unknown') {
-      console.error(`Could not resolve symbol for identifier "${identifier.text}" ` + 
+      console.error(`Could not resolve symbol for identifier "${identifier.text}" ` +
           `in file ${this._getRelativeFileName()}`);
       return;
     }
@@ -95,7 +92,11 @@ export class SwitchIdentifiersWalker extends ProgramAwareRuleWalker {
     const replacement = this.createReplacement(
         identifier.getStart(), identifier.getWidth(), classData.replaceWith);
 
-    this.addFailureAtNode(identifier, failureMessage, replacement);
+    this.addFailureAtNode(
+        identifier,
+        `Found deprecated identifier "${red(classData.replace)}" which has been renamed to` +
+        ` "${green(classData.replaceWith)}"`,
+        replacement);
   }
 
   /** Checks namespace imports from Angular Material and stores them in a list. */

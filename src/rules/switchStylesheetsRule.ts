@@ -1,13 +1,16 @@
-import {Rules, RuleFailure, IOptions} from 'tslint';
+import {sync as globSync} from 'glob';
+import {IOptions, Replacement, RuleFailure, Rules} from 'tslint';
 import * as ts from 'typescript';
-import {ComponentWalker} from '../tslint/component-walker';
-import {ExternalResource} from '../tslint/component-file';
 import {
-  attributeSelectors, cssNames, elementSelectors, inputNames,
+  attributeSelectors,
+  cssNames,
+  elementSelectors,
+  inputNames,
   outputNames
 } from '../material/component-data';
-import {replaceAll} from '../typescript/literal';
-import {sync as globSync} from 'glob';
+import {ExternalResource} from '../tslint/component-file';
+import {ComponentWalker} from '../tslint/component-walker';
+import {findAll} from '../typescript/literal';
 
 /**
  * A glob string needs to be transferred from the CLI process to the child process of TSLint.
@@ -48,54 +51,79 @@ export class SwitchStylesheetsWalker extends ComponentWalker {
   }
 
   visitInlineStylesheet(stylesheet: ts.StringLiteral) {
-    const newStylesheetText = this.replaceNamesInStylesheet(stylesheet.getText());
-
-    if (newStylesheetText !== stylesheet.getText()) {
-      const replacement = this.createReplacement(stylesheet.getStart(), stylesheet.getWidth(),
-          newStylesheetText);
-
-      this.addFailureAtNode(stylesheet, failureMessage, replacement);
-    }
+    this.replaceNamesInStylesheet(stylesheet, stylesheet.getText()).forEach(replacement => {
+      this.addFailureAtNode(stylesheet, replacement.message, replacement.replacement);
+    });
   }
 
   visitExternalStylesheet(stylesheet: ExternalResource) {
-    const newStylesheetText = this.replaceNamesInStylesheet(stylesheet.getFullText());
-
-    if (newStylesheetText !== stylesheet.getFullText()) {
-      const replacement = this.createReplacement(stylesheet.getStart(), stylesheet.getWidth(),
-          newStylesheetText);
-
-      this.addExternalResourceFailure(stylesheet, failureMessage, replacement);
-    }
+    this.replaceNamesInStylesheet(stylesheet, stylesheet.getFullText()).forEach(replacement => {
+      this.addExternalResourceFailure(stylesheet, replacement.message, replacement.replacement);
+    });
   }
 
   /**
    * Replaces the outdated name in the stylesheet with the new one and returns an updated
    * stylesheet.
    */
-  private replaceNamesInStylesheet(stylesheetContent: string): string {
+  private replaceNamesInStylesheet(node: ts.Node, stylesheetContent: string):
+      {message: string, replacement: Replacement}[] {
+    const replacements: {message: string, replacement: Replacement}[] = [];
+
     elementSelectors.forEach(selector => {
-      stylesheetContent = replaceAll(stylesheetContent, selector.replace, selector.replaceWith);
+      this.createReplacementsForOffsets(node, selector,
+          findAll(stylesheetContent, selector.replace)).forEach(replacement => {
+            replacements.push({message: failureMessage, replacement});
+          });
     });
 
     attributeSelectors.forEach(selector => {
-      stylesheetContent =
-          replaceAll(stylesheetContent, `[${selector.replace}]`, `[${selector.replaceWith}]`);
+      const bracketedSelector = {
+        replace: `[${selector.replace}]`,
+        replaceWith: `[${selector.replaceWith}]`
+      };
+      this.createReplacementsForOffsets(node, bracketedSelector,
+          findAll(stylesheetContent, bracketedSelector.replace)).forEach(replacement => {
+        replacements.push({message: failureMessage, replacement});
+      });
     });
 
     cssNames.forEach(name => {
       if (!name.whitelist || name.whitelist.css) {
-        stylesheetContent = replaceAll(stylesheetContent, name.replace, name.replaceWith);
+        this.createReplacementsForOffsets(node, name, findAll(stylesheetContent, name.replace))
+            .forEach(replacement => {
+              replacements.push({message: failureMessage, replacement});
+            });
       }
     });
 
-    [...inputNames, ...outputNames].forEach(name => {
+    inputNames.forEach(name => {
       if (!name.whitelist || name.whitelist.css) {
-        stylesheetContent =
-            replaceAll(stylesheetContent, `[${name.replace}]`, `[${name.replaceWith}]`);
+        const bracketedName = {replace: `[${name.replace}]`, replaceWith: `[${name.replaceWith}]`};
+        this.createReplacementsForOffsets(node, name,
+            findAll(stylesheetContent, bracketedName.replace)).forEach(replacement => {
+              replacements.push({message: failureMessage, replacement});
+            });
       }
     });
 
-    return stylesheetContent;
+    outputNames.forEach(name => {
+      if (!name.whitelist || name.whitelist.css) {
+        const bracketedName = {replace: `[${name.replace}]`, replaceWith: `[${name.replaceWith}]`};
+        this.createReplacementsForOffsets(node, name,
+            findAll(stylesheetContent, bracketedName.replace)).forEach(replacement => {
+              replacements.push({message: failureMessage, replacement});
+            });
+      }
+    });
+
+    return replacements;
+  }
+
+  private createReplacementsForOffsets(node: ts.Node,
+                                       update: {replace: string, replaceWith: string},
+                                       offsets: number[]): Replacement[] {
+    return offsets.map(offset => this.createReplacement(
+        node.getStart() + offset, update.replace.length, update.replaceWith));
   }
 }
