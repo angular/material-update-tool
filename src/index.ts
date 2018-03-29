@@ -8,4 +8,9 @@ export {Rule as SwitchStylesheetCssNamesRule} from './rules/switchStylesheetCssN
 export {Rule as SwitchStylesheetElementSelectorsRule} from './rules/switchStylesheetElementSelectorsRule';
 export {Rule as SwitchStylesheetInputNamesRule} from './rules/switchStylesheetInputNamesRule';
 export {Rule as SwitchStylesheetOutputNamesRule} from './rules/switchStylesheetOutputNamesRule';
-export {Rule as SwitchTemplatesRule} from './rules/switchTemplatesRule';
+export {Rule as SwitchTemplateAttributeSelectorsRule} from './rules/switchTemplateAttributeSelectorsRule';
+export {Rule as SwitchTemplateCssNamesRule} from './rules/switchTemplateCssNamesRule';
+export {Rule as SwitchTemplateElementSelectorsRule} from './rules/switchTemplateElementSelectorsRule';
+export {Rule as SwitchTemplateExportAsNamesRule} from './rules/switchTemplateExportAsNamesRule';
+export {Rule as SwitchTemplateInputNamesRule} from './rules/switchTemplateInputNamesRule';
+export {Rule as SwitchTemplateOutputNamesRule} from './rules/switchTemplateOutputNamesRule';

@@ -10,12 +10,6 @@ import {ComponentWalker} from '../tslint/component-walker';
 import {findAll} from '../typescript/literal';
 
 /**
- * Message that is being sent to TSLint if there is something in the stylesheet that still use an
- * outdated name.
- */
-const failureMessage = 'Stylesheet uses outdated Material name.';
-
-/**
  * Rule that walks through every component decorator and updates their inline or external
  * stylesheets.
  */

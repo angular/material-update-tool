@@ -4,9 +4,6 @@ import * as ts from 'typescript';
 import {attributeSelectors} from '../material/component-data';
 import {findAll} from '../typescript/literal';
 
-/** Message that is being sent to TSLint if a string literal still uses the outdated name. */
-const failureMessage = 'Deprecated string literal value can be updated.';
-
 /**
  * Rule that walks through every string literal, which includes the outdated Material name and
  * is part of a call expression. Those string literals will be changed to the new name.

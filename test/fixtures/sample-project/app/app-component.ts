@@ -25,7 +25,8 @@ export class AppComponent {}
       button[mat-button] {
         text-transform: none;
       }
-        
+
+      /* This line should be changed: */
       mat-input-container {}
     `
   ]

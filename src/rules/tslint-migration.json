@@ -11,6 +11,11 @@
     "switch-stylesheet-element-selectors": true,
     "switch-stylesheet-input-names": true,
     "switch-stylesheet-output-names": true,
-    "switch-templates": true
+    "switch-template-attribute-selectors": true,
+    "switch-template-css-names": true,
+    "switch-template-element-selectors": true,
+    "switch-template-export-as-names": true,
+    "switch-template-input-names": true,
+    "switch-template-output-names": true
   }
 }
