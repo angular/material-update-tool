@@ -29,14 +29,12 @@ const failureMessage = 'Template uses outdated Material name.';
  * templates.
  */
 export class Rule extends Rules.AbstractRule {
-
   apply(sourceFile: ts.SourceFile): RuleFailure[] {
     return this.applyWithWalker(new SwitchTemplatesWalker(sourceFile, this.getOptions()));
   }
 }
 
 export class SwitchTemplatesWalker extends ComponentWalker {
-
   visitInlineTemplate(template: ts.StringLiteral) {
     this.replaceNamesInTemplate(template, template.getText()).forEach(replacement => {
       this.addFailureAtNode(template, replacement.message, replacement.replacement);

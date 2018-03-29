@@ -29,7 +29,6 @@ const failureMessage = 'Stylesheet uses outdated Material name.';
  * stylesheets.
  */
 export class Rule extends Rules.AbstractRule {
-
   apply(sourceFile: ts.SourceFile): RuleFailure[] {
     return this.applyWithWalker(new SwitchStylesheetsWalker(sourceFile, this.getOptions()));
   }

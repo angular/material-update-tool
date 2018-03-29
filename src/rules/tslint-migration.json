@@ -3,6 +3,9 @@
   "rules": {
     "switch-identifiers": true,
     "switch-string-literals": true,
+    "switch-string-literal-attribute-selectors": true,
+    "switch-string-literal-css-names": true,
+    "switch-string-literal-element-selectors": true,
     "switch-templates": true,
     "switch-stylesheets": true,
     "switch-property-names": true
