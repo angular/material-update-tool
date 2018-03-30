@@ -1,5 +1,10 @@
+export {Rule as CheckClassDeclarationMiscRule} from './rules/checkClassDeclarationMiscRule';
+export {Rule as CheckIdentifierMiscRule} from './rules/checkIdentifierMiscRule';
+export {Rule as CheckImportMiscRule} from './rules/checkImportMiscRule';
 export {Rule as CheckInheritanceRule} from './rules/checkInheritanceRule';
 export {Rule as CheckMethodCallsRule} from './rules/checkMethodCallsRule';
+export {Rule as CheckPropertyAccessMiscRule} from './rules/checkPropertyAccessMiscRule';
+export {Rule as CheckTemplateMiscRule} from './rules/checkTemplateMiscRule';
 export {Rule as SwitchIdentifiersRule} from './rules/switchIdentifiersRule';
 export {Rule as SwitchPropertyNamesRule} from './rules/switchPropertyNamesRule';
 export {Rule as SwitchStringLiteralAttributeSelectorsRule} from './rules/switchStringLiteralAttributeSelectorsRule';

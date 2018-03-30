@@ -1,3 +1,4 @@
+import {bold, green, red} from 'chalk';
 import {ProgramAwareRuleWalker, RuleFailure, Rules} from 'tslint';
 import * as ts from 'typescript';
 import {propertyNames} from '../material/component-data';
@@ -24,9 +25,10 @@ export class CheckInheritanceWalker extends ProgramAwareRuleWalker {
       if (propertyData) {
         this.addFailureAtNode(
             declaration,
-            `Found class "${declaration.name.text}" which extends class "${t.symbol.name}".` +
-            ` Please note that the base class property "${propertyData.replace}" has changed to` +
-            ` "${propertyData.replaceWith}". You may need to update your class as well`);
+            `Found class "${bold(declaration.name.text)}" which extends class` +
+            ` "${bold(t.symbol.name)}". Please note that the base class property` +
+            ` "${red(propertyData.replace)}" has changed to "${green(propertyData.replaceWith)}".` +
+            ` You may need to update your class as well`);
       }
     });
   }

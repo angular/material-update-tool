@@ -8,7 +8,7 @@
         "invalidArgCounts": [
           {
             "count": 1,
-            "message": "\"platform\" is now required as a second argument"
+            "message": "\"g{{platform}}\" is now required as a second argument"
           }
         ]
       }
@@ -25,7 +25,7 @@
         "invalidArgCounts": [
           {
             "count": 2,
-            "message": "\"default\" is now required as a third argument"
+            "message": "\"g{{default}}\" is now required as a third argument"
           }
         ]
       }
@@ -42,7 +42,7 @@
         "invalidArgCounts": [
           {
             "count": 3,
-            "message": "The \"renderer\" argument has been removed"
+            "message": "The \"r{{renderer}}\" argument has been removed"
           }
         ]
       }
@@ -59,7 +59,7 @@
         "invalidArgCounts": [
           {
             "count": 11,
-            "message": "\"_defaultOptions\" is now required as a twelfth argument"
+            "message": "\"g{{_defaultOptions}}\" is now required as a twelfth argument"
           }
         ]
       }
@@ -76,7 +76,28 @@
         "invalidArgCounts": [
           {
             "count": 2,
-            "message": "\"document\" is now required as a third argument"
+            "message": "\"g{{document}}\" is now required as a third argument"
+          }
+        ]
+      }
+    ]
+  },
+
+
+  {
+    "pr": "https://github.com/angular/material2/pull/9775",
+    "changes": [
+      {
+        "className": "MatCalendar",
+        "method": "constructor",
+        "invalidArgCounts": [
+          {
+            "count": 6,
+            "message": "\"r{{_elementRef}}\" and \"r{{_ngZone}}\" arguments have been removed"
+          },
+          {
+            "count": 7,
+            "message": "\"r{{_elementRef}}\", \"r{{_ngZone}}\", and \"r{{_dir}}\" arguments have been removed"
           }
         ]
       }

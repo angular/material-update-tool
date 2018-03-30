@@ -99,6 +99,20 @@
         "whitelist": {
           "classes": ["MatSelect"]
         }
+      },
+      {
+        "replace": "onOpen",
+        "replaceWith": "openedChange.pipe(filter(isOpen => isOpen))",
+        "whitelist": {
+          "classes": ["MatSelect"]
+        }
+      },
+      {
+        "replace": "onClose",
+        "replaceWith": "openedChange.pipe(filter(isOpen => !isOpen))",
+        "whitelist": {
+          "classes": ["MatSelect"]
+        }
       }
     ]
   },
@@ -166,6 +180,20 @@
       {
         "replace": "onAlignChanged",
         "replaceWith": "onPositionChanged",
+        "whitelist": {
+          "classes": ["MatDrawer", "MatSidenav"]
+        }
+      },
+      {
+        "replace": "onOpen",
+        "replaceWith": "openedChange.pipe(filter(isOpen => isOpen))",
+        "whitelist": {
+          "classes": ["MatDrawer", "MatSidenav"]
+        }
+      },
+      {
+        "replace": "onClose",
+        "replaceWith": "openedChange.pipe(filter(isOpen => !isOpen))",
         "whitelist": {
           "classes": ["MatDrawer", "MatSidenav"]
         }
