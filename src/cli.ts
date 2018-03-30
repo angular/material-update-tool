@@ -28,6 +28,13 @@ option('extra-stylesheets', {
   required: false
 });
 
+option('fix', {
+  describe: 'Whether to attempt to automatically fix issues',
+  boolean: true,
+  required: false,
+  default: true
+});
+
 /** Path to the TypeScript project. */
 let projectPath: string = argv.project;
 
@@ -47,6 +54,9 @@ if (projectPath) {
 
   // Command line arguments for dispatching the TSLint executable.
   const tslintArgs = ['-c', migrationConfig, '-p', projectPath];
+  if (argv.fix) {
+    tslintArgs.push('--fix');
+  }
   const childProcessEnv = { ...process.env };
 
   if (argv.extraStylesheets) {
