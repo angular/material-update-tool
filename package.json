@@ -1,12 +1,12 @@
 {
-  "name": "angular-material-prefix-updater",
-  "version": "0.0.6",
-  "description": "Switches the `Md` prefix to `Mat` in Angular Material apps",
-  "homepage": "https://github.com/angular/material-prefix-updater",
-  "bugs": "https://github.com/angular/material-prefix-updater/issues",
+  "name": "angular-material-updater",
+  "version": "0.0.7",
+  "description": "Migrates projects from Angular Material 5.x to 6.0",
+  "homepage": "https://github.com/angular/material-update-tool",
+  "bugs": "https://github.com/angular/material-update-tool/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/angular/material-prefix-updater.git"
+    "url": "https://github.com/angular/material-update-tool.git"
   },
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "debug": "npm run build && node dist/cli -p test/fixtures/sample-project -v --es test/fixtures/**/*.{css,scss} --fix=false"
   },
   "bin": {
-    "mat-switcher": "./cli.js"
+    "mat-updater": "./cli.js"
   },
   "author": "",
   "license": "MIT",
