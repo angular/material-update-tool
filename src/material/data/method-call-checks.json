@@ -1,0 +1,85 @@
+[
+  {
+    "pr": "https://github.com/angular/material2/pull/9190",
+    "changes": [
+      {
+        "className": "NativeDateAdapter",
+        "method": "constructor",
+        "invalidArgCounts": [
+          {
+            "count": 1,
+            "message": "\"platform\" is now required as a second argument"
+          }
+        ]
+      }
+    ]
+  },
+
+
+  {
+    "pr": "https://github.com/angular/material2/pull/10319",
+    "changes": [
+      {
+        "className": "MatAutocomplete",
+        "method": "constructor",
+        "invalidArgCounts": [
+          {
+            "count": 2,
+            "message": "\"default\" is now required as a third argument"
+          }
+        ]
+      }
+    ]
+  },
+
+
+  {
+    "pr": "https://github.com/angular/material2/pull/10325",
+    "changes": [
+      {
+        "className": "FocusMonitor",
+        "method": "monitor",
+        "invalidArgCounts": [
+          {
+            "count": 3,
+            "message": "The \"renderer\" argument has been removed"
+          }
+        ]
+      }
+    ]
+  },
+
+
+  {
+    "pr": "https://github.com/angular/material2/pull/10344",
+    "changes": [
+      {
+        "className": "MatTooltip",
+        "method": "constructor",
+        "invalidArgCounts": [
+          {
+            "count": 11,
+            "message": "\"_defaultOptions\" is now required as a twelfth argument"
+          }
+        ]
+      }
+    ]
+  },
+
+
+  {
+    "pr": "https://github.com/angular/material2/pull/10389",
+    "changes": [
+      {
+        "className": "MatIconRegistry",
+        "method": "constructor",
+        "invalidArgCounts": [
+          {
+            "count": 2,
+            "message": "\"document\" is now required as a third argument"
+          }
+        ]
+      }
+    ]
+  }
+]

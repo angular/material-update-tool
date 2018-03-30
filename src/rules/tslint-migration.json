@@ -16,6 +16,9 @@
     "switch-template-element-selectors": true,
     "switch-template-export-as-names": true,
     "switch-template-input-names": true,
-    "switch-template-output-names": true
+    "switch-template-output-names": true,
+
+    "check-inheritance": true,
+    "check-method-calls": true
   }
 }
