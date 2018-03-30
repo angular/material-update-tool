@@ -19,6 +19,12 @@
     "switch-template-output-names": true,
 
     "check-inheritance": true,
-    "check-method-calls": true
+    "check-method-calls": true,
+
+    "check-class-declaration-misc": true,
+    "check-identifier-misc": true,
+    "check-import-misc": true,
+    "check-property-access-misc": true,
+    "check-template-misc": true
   }
 }

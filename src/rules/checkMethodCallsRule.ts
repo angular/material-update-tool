@@ -1,5 +1,7 @@
+import {bold} from 'chalk';
 import {ProgramAwareRuleWalker, RuleFailure, Rules} from 'tslint';
 import * as ts from 'typescript';
+import {color} from '../material/color';
 import {methodCallChecks} from '../material/component-data';
 
 /**
@@ -51,8 +53,8 @@ export class CheckMethodCallsWalker extends ProgramAwareRuleWalker {
     if (failure) {
       this.addFailureAtNode(
           expression,
-          `Found call to "${className}.${methodName}" with ${failure.count} arguments.` +
-          ` ${failure.message}`);
+          `Found call to "${bold(className + '.' + methodName)}" with` +
+          ` ${bold(String(failure.count))} arguments. ${color(failure.message)}`);
     }
   }
 
@@ -68,7 +70,8 @@ export class CheckMethodCallsWalker extends ProgramAwareRuleWalker {
     if (failure) {
       this.addFailureAtNode(
           node,
-          `Found "${className}" constructed with ${failure.count} arguments. ${failure.message}`);
+          `Found "${bold(className)}" constructed with ${bold(String(failure.count))} arguments.` +
+          ` ${color(failure.message)}`);
     }
   }
 }

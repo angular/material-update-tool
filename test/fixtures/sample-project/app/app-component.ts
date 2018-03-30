@@ -1,7 +1,15 @@
 import {FocusMonitor} from '@angular/cdk/a11y';
 import {ConnectedOverlayDirective} from '@angular/cdk/overlay';
 import {Component, ElementRef, EventEmitter, ViewChild} from '@angular/core';
-import {MAT_PLACEHOLDER_GLOBAL_OPTIONS, MatSidenav, NativeDateAdapter} from '@angular/material';
+import {
+  MAT_PLACEHOLDER_GLOBAL_OPTIONS, MatDatepicker,
+  MatDrawerToggleResult,
+  MatFormFieldControl, MatListOption, MatListOptionChange,
+  MatSelect,
+  MatSidenav,
+  NativeDateAdapter
+} from '@angular/material';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'md-app-component',
@@ -35,12 +43,18 @@ export class AppComponent {}
 export class TestComponent {
   @ViewChild('cod') cod: ConnectedOverlayDirective;
   @ViewChild('snav') snav: MatSidenav;
+  @ViewChild('select') select: MatSelect;
+  @ViewChild('opt') opt: MatListOption;
+  @ViewChild('dp') dp: MatDatepicker<any>;
 
   thing = new MyThing();
+  blah: MatDrawerToggleResult;
 
   constructor(el: ElementRef, fm: FocusMonitor) {
     fm.monitor(el.nativeElement, null, true);
     let cods = [this.cod];
+    this.opt.selectionChange.subscribe((x: MatListOptionChange) => {});
+    this.dp.selectedChanged.subscribe(() => {});
 
     // These lines should be changed:
     this.cod._deprecatedBackdropClass = 'test';
@@ -48,6 +62,7 @@ export class TestComponent {
     cods[0]._deprecatedHeight = 1;
     let x = MAT_PLACEHOLDER_GLOBAL_OPTIONS;
     let y = el.nativeElement.querySelector('mat-input-container');
+    this.select.onOpen.subscribe(() => {});
 
     // These lines should not be changed:
     this.thing._deprecatedBackdropClass = 'test';
@@ -64,4 +79,19 @@ class MySidenav extends MatSidenav {}
 
 class MyDateAdapter extends NativeDateAdapter {
   constructor() { super(null); }
+}
+
+class MyFormFiledControl implements MatFormFieldControl<any> {
+  value: any;
+  stateChanges: Observable<void>;
+  id: string;
+  placeholder: string;
+  ngControl: | null;
+  focused: boolean;
+  empty: boolean;
+  required: boolean;
+  disabled: boolean;
+  errorState: boolean;
+  setDescribedByIds(ids: string[]): void {}
+  onContainerClick(event: MouseEvent): void {}
 }
