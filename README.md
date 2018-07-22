@@ -1,6 +1,6 @@
 # Angular Material 5.x to 6.0 updater tool
 
-**Outdated**: This repository won't be updated anymore. Future major releases for Angular Material will also include an upgrade tool that can be used in **Angular CLI** projects by running **`ng update @angular/material`**
+**Outdated**: This repository won't be updated anymore. Future major releases for Angular Material will also have an upgrade tool that can be used in **Angular CLI** projects by running **`ng update @angular/material`**
 
 ---
 
